@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LectuVault - Biblioteca Digital Abierta | Descarga Libros PDF y EPUB Gratis</title>
+  <meta name="description" content="Descarga libros completos en PDF y EPUB gratis sin registro. Miles de títulos sobre finanzas, desarrollo personal, programación y novelas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Barra de Notificación Superior Tipo Web Pirata -->
+  <div class="top-banner">
+    <div class="container top-banner-content">
+      <span class="pulse-dot"></span>
+      <p><strong>Aviso del Servidor:</strong> Rediseño de nodos v4.2. Debido a reclamaciones DMCA, varios servidores espejo están caídos. Solo los enlaces con sello <span class="badge-mini-green">ONLINE</span> disponen de descarga directa inmediata.</p>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container nav-content">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10M6 14h6"/></svg>
+        </div>
+        <span class="logo-text">Lectu<span>Vault</span> <small>v2.8</small></span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#destacados" class="active">Explorar</a>
+        <a href="#categorias" onclick="openDmcaModal('Categorías generales en indexación')">Categorías</a>
+        <a href="#dmca" onclick="openDmcaNotice()">Aviso Legal / DMCA</a>
+        <a href="#donar" class="btn-donate" onclick="alert('Sistema de donaciones Bitcoin en mantenimiento. No se aceptan donaciones actualmente.')">Donar (BTC)</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero & Buscador -->
+  <section class="hero">
+    <div class="container hero-container">
+      <div class="hero-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.45l8.28 14.55H3.72L12 5.45zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z"/></svg>
+        Acceso Público Sin Registro - Mirror P2P
+      </div>
+      <h1 class="hero-title">Encuentra y descarga libros en <span>PDF, EPUB y MOBI</span></h1>
+      <p class="hero-subtitle">Repositorio libre e independiente. Más de 180,000 títulos indexados por la comunidad internacional.</p>
+
+      <!-- Buscador Funcional -->
+      <div class="search-box">
+        <div class="search-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </div>
+        <input type="text" id="searchInput" placeholder="Buscar por título, autor o ISBN (ej: Gavin Ross, Make More Money...)" autocomplete="off">
+        <button id="searchBtn" class="btn-search">Buscar Libro</button>
+      </div>
+
+      <div class="trending-tags">
+        <span class="tag-label">Tendencias hoy:</span>
+        <button class="tag-btn highlight-tag" onclick="filterBook('Make More Money')">🔥 Make More Money (Gavin Ross)</button>
+        <button class="tag-btn" onclick="filterBook('Robert Kiyosaki')">Robert Kiyosaki</button>
+        <button class="tag-btn" onclick="filterBook('James Clear')">Hábitos Atómicos</button>
+        <button class="tag-btn" onclick="filterBook('Finanzas')">Finanzas & Riqueza</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Principal: Resultados y Catálogo -->
+  <main class="container main-content" id="destacados">
+    
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Catálogo Destacado de Hoy</h2>
+        <p class="section-sub">Actualizado hace 18 minutos • Protocolo de descarga directa</p>
+      </div>
+      <div class="filter-pills">
+        <button class="pill active" onclick="filterCategory('todos')">Todos</button>
+        <button class="pill" onclick="filterCategory('finanzas')">Finanzas & Negocios</button>
+        <button class="pill" onclick="filterCategory('autoayuda')">Desarrollo Personal</button>
+        <button class="pill" onclick="filterCategory('tecnologia')">Tecnología</button>
+      </div>
+    </div>
+
+    <!-- Grid de Libros -->
+    <div class="books-grid" id="booksGrid">
+      
+      <!-- LIBRO PRINCIPAL: GAVIN ROSS (100% ACTIVO Y DESCARGABLE) -->
+      <article class="book-card featured-card" data-title="make more money gavin ross finanzas riqueza" data-category="finanzas">
+        <div class="status-ribbon">SERVIDOR ACTIVO ★</div>
+        <div class="book-cover-wrap" onclick="openBookDetails()">
+          <img src="assets/cover_make_more_money.jpg" alt="Libro Make More Money - Gavin Ross" class="book-cover-img" loading="lazy">
+          <div class="cover-overlay">
+            <span class="btn-view-quick">Ver Ficha y Descargar</span>
+          </div>
+        </div>
+        <div class="book-info">
+          <div class="book-meta-top">
+            <span class="badge-status badge-online">● Online (1 Gbps)</span>
+            <span class="book-size">3.8 MB • PDF / EPUB</span>
+          </div>
+          <h3 class="book-title" onclick="openBookDetails()">Make More Money</h3>
+          <p class="book-author">Por <strong>Gavin Ross</strong></p>
+          <div class="book-rating">
+            <span class="stars">★★★★★</span>
+            <span class="rating-num">4.9</span>
+            <span class="votes">(2,840 descargas)</span>
+          </div>
+          <p class="book-excerpt">La guía definitiva sobre generación acelerada de riqueza, mentalidad estratégica y multiplicación de ingresos sin ataduras.</p>
+          
+          <div class="card-actions">
+            <button class="btn-download-primary" onclick="openDownloadModal()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Descargar Gratis
+            </button>
+            <button class="btn-info-secondary" onclick="openBookDetails()" title="Ver ficha técnica">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- LIBRO CEBO 1 (Deshabilitado / DMCA) -->
+      <article class="book-card fake-book" data-title="padre rico padre pobre robert kiyosaki finanzas" data-category="finanzas" onclick="openDmcaModal('Padre Rico, Padre Pobre')">
+        <div class="book-cover-wrap placeholder-cover cover-blue">
+          <div class="placeholder-content">
+            <span class="ph-tag">Bestseller</span>
+            <h4>Padre Rico, Padre Pobre</h4>
+            <p>Robert Kiyosaki</p>
+          </div>
+          <div class="cover-overlay">
+            <span class="btn-view-quick">Servidor Caído</span>
+          </div>
+        </div>
+        <div class="book-info">
+          <div class="book-meta-top">
+            <span class="badge-status badge-offline">✕ Servidor Caído (DMCA)</span>
+            <span class="book-size">5.1 MB</span>
+          </div>
+          <h3 class="book-title">Padre Rico, Padre Pobre</h3>
+          <p class="book-author">Por <strong>Robert T. Kiyosaki</strong></p>
+          <div class="book-rating">
+            <span class="stars">★★★★☆</span>
+            <span class="rating-num">4.7</span>
+          </div>
+          <p class="book-excerpt">Qué les enseñan los ricos a sus hijos acerca del dinero que los pobres y la clase media no.</p>
+          <button class="btn-download-disabled">
+            <span>Enlace Bloqueado</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- LIBRO CEBO 2 (Deshabilitado / DMCA) -->
+      <article class="book-card fake-book" data-title="habitos atomicos james clear autoayuda desarrollo" data-category="autoayuda" onclick="openDmcaModal('Hábitos Atómicos')">
+        <div class="book-cover-wrap placeholder-cover cover-orange">
+          <div class="placeholder-content">
+            <span class="ph-tag">Autoayuda</span>
+            <h4>Hábitos Atómicos</h4>
+            <p>James Clear</p>
+          </div>
+          <div class="cover-overlay">
+            <span class="btn-view-quick">Servidor Caído</span>
+          </div>
+        </div>
+        <div class="book-info">
+          <div class="book-meta-top">
+            <span class="badge-status badge-offline">✕ Servidor Caído (DMCA)</span>
+            <span class="book-size">4.4 MB</span>
+          </div>
+          <h3 class="book-title">Hábitos Atómicos</h3>
+          <p class="book-author">Por <strong>James Clear</strong></p>
+          <div class="book-rating">
+            <span class="stars">★★★★★</span>
+            <span class="rating-num">4.9</span>
+          </div>
+          <p class="book-excerpt">Un método sencillo y comprobado para desarrollar buenos hábitos y eliminar los malos.</p>
+          <button class="btn-download-disabled">
+            <span>Enlace Bloqueado</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- LIBRO CEBO 3 (Deshabilitado / DMCA) -->
+      <article class="book-card fake-book" data-title="el hombre mas rico de babilonia george clason finanzas" data-category="finanzas" onclick="openDmcaModal('El Hombre Más Rico de Babilonia')">
+        <div class="book-cover-wrap placeholder-cover cover-purple">
+          <div class="placeholder-content">
+            <span class="ph-tag">Clásico</span>
+            <h4>El Hombre Más Rico de Babilonia</h4>
+            <p>George S. Clason</p>
+          </div>
+          <div class="cover-overlay">
+            <span class="btn-view-quick">Servidor Caído</span>
+          </div>
+        </div>
+        <div class="book-info">
+          <div class="book-meta-top">
+            <span class="badge-status badge-offline">✕ Servidor Caído (DMCA)</span>
+            <span class="book-size">2.9 MB</span>
+          </div>
+          <h3 class="book-title">El Hombre Más Rico de Babilonia</h3>
+          <p class="book-author">Por <strong>George S. Clason</strong></p>
+          <div class="book-rating">
+            <span class="stars">★★★★☆</span>
+            <span class="rating-num">4.6</span>
+          </div>
+          <p class="book-excerpt">Los secretos del éxito de los antiguos para conseguir riqueza y felicidad permanente.</p>
+          <button class="btn-download-disabled">
+            <span>Enlace Bloqueado</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- LIBRO CEBO 4 (Deshabilitado / DMCA) -->
+      <article class="book-card fake-book" data-title="codigo limpio clean code robert c martin tecnologia" data-category="tecnologia" onclick="openDmcaModal('Clean Code')">
+        <div class="book-cover-wrap placeholder-cover cover-cyan">
+          <div class="placeholder-content">
+            <span class="ph-tag">Software</span>
+            <h4>Clean Code</h4>
+            <p>Robert C. Martin</p>
+          </div>
+          <div class="cover-overlay">
+            <span class="btn-view-quick">Servidor Caído</span>
+          </div>
+        </div>
+        <div class="book-info">
+          <div class="book-meta-top">
+            <span class="badge-status badge-offline">✕ Servidor Caído (DMCA)</span>
+            <span class="book-size">6.7 MB</span>
+          </div>
+          <h3 class="book-title">Clean Code (Código Limpio)</h3>
+          <p class="book-author">Por <strong>Robert C. Martin (Uncle Bob)</strong></p>
+          <div class="book-rating">
+            <span class="stars">★★★★★</span>
+            <span class="rating-num">4.8</span>
+          </div>
+          <p class="book-excerpt">Manual de estilo para el desarrollo ágil de software y buenas prácticas de ingeniería.</p>
+          <button class="btn-download-disabled">
+            <span>Enlace Bloqueado</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- LIBRO CEBO 5 (Deshabilitado / DMCA) -->
+      <article class="book-card fake-book" data-title="la psicologia del dinero morgan housel finanzas" data-category="finanzas" onclick="openDmcaModal('La Psicología del Dinero')">
+        <div class="book-cover-wrap placeholder-cover cover-emerald">
+          <div class="placeholder-content">
+            <span class="ph-tag">Finanzas</span>
+            <h4>La Psicología del Dinero</h4>
+            <p>Morgan Housel</p>
+          </div>
+          <div class="cover-overlay">
+            <span class="btn-view-quick">Servidor Caído</span>
+          </div>
+        </div>
+        <div class="book-info">
+          <div class="book-meta-top">
+            <span class="badge-status badge-offline">✕ Servidor Caído (DMCA)</span>
+            <span class="book-size">3.5 MB</span>
+          </div>
+          <h3 class="book-title">La Psicología del Dinero</h3>
+          <p class="book-author">Por <strong>Morgan Housel</strong></p>
+          <div class="book-rating">
+            <span class="stars">★★★★★</span>
+            <span class="rating-num">4.8</span>
+          </div>
+          <p class="book-excerpt">Cómo piensan las personas exitosas sobre la riqueza, la codicia y la felicidad.</p>
+          <button class="btn-download-disabled">
+            <span>Enlace Bloqueado</span>
+          </button>
+        </div>
+      </article>
+
+    </div>
+
+    <div id="noResults" class="no-results" style="display: none;">
+      <p>No se encontraron otros títulos activos bajo ese criterio.</p>
+      <button class="btn-reset-search" onclick="resetSearch()">Mostrar el libro disponible: Make More Money</button>
+    </div>
+  </main>
+
+  <!-- MODAL 1: FICHA TÉCNICA DETALLADA DE "MAKE MORE MONEY" -->
+  <div class="modal-backdrop" id="detailsModal">
+    <div class="modal-dialog modal-large">
+      <button class="modal-close" onclick="closeModals()">&times;</button>
+      
+      <div class="details-layout">
+        <div class="details-left">
+          <img src="assets/cover_make_more_money.jpg" alt="Make More Money Gavin Ross" class="details-cover">
+          <div class="verification-badge">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#10b981"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            <span>Archivo Verificado por la Comunidad</span>
+          </div>
+          <p class="scan-note">Escaneo antivirus: 0/68 detecciones (Limpio)</p>
+        </div>
+
+        <div class="details-right">
+          <div class="tags-row">
+            <span class="tag-pill">Finanzas & Libertad</span>
+            <span class="tag-pill">Edición Bestseller</span>
+            <span class="tag-pill tag-live">Mirror Activo 100%</span>
+          </div>
+
+          <h2 class="details-title">Make More Money</h2>
+          <p class="details-author">Autor: <strong>Gavin Ross</strong></p>
+
+          <div class="meta-table">
+            <div class="meta-row">
+              <span class="meta-key">Páginas:</span>
+              <span class="meta-val">268 páginas</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-key">Idioma:</span>
+              <span class="meta-val">Español / Edición Oficial</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-key">Formatos incluidos:</span>
+              <span class="meta-val">PDF (A4/Carta) & EPUB compatible con Kindle</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-key">Tamaño de archivo:</span>
+              <span class="meta-val">3.8 MB</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-key">Hash MD5:</span>
+              <span class="meta-val hash-text">d41d8cd98f00b204e9800998ecf8427e</span>
+            </div>
+          </div>
+
+          <div class="synopsis-box">
+            <h4>Sinopsis de la obra:</h4>
+            <p>
+              En <em>Make More Money</em>, Gavin Ross desglosa sin rodeos los principios modernos de la multiplicación de ingresos, la creación de sistemas de flujo de efectivo automatizados y las tácticas psicológicas para desbloquear el verdadero potencial financiero individual. Un manual directo, pragmático y disruptivo para quienes buscan salir de la trampa salarial y construir verdadera soberanía económica.
+            </p>
+          </div>
+
+          <div class="modal-action-bar">
+            <button class="btn-download-primary btn-pulse" onclick="openDownloadModal()">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Descargar Libro Completo Ahora
+            </button>
+          </div>
+
+          <!-- Comentarios Falsos Realistas -->
+          <div class="reviews-section">
+            <h4>Comentarios recientes de usuarios:</h4>
+            <div class="review-item">
+              <div class="review-header">
+                <strong>carlos_m92</strong> <span class="stars">★★★★★</span> <span class="review-date">Ayer, 21:14</span>
+              </div>
+              <p>¡Muchas gracias por subirlo! Lo estuve buscando en varios foros y todos los links estaban caídos. Este descargó al instante.</p>
+            </div>
+            <div class="review-item">
+              <div class="review-header">
+                <strong>lector_nocturno</strong> <span class="stars">★★★★★</span> <span class="review-date">Hace 3 días</span>
+              </div>
+              <p>Excelente formato, se lee perfecto en mi Kindle. Recomendadísimo este libro de Gavin Ross.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: SERVIDORES & CONTADOR DE DESCARGA PIRATA -->
+  <div class="modal-backdrop" id="downloadModal">
+    <div class="modal-dialog modal-download">
+      <button class="modal-close" onclick="closeModals()">&times;</button>
+      
+      <div class="download-modal-content">
+        <div class="dl-header">
+          <div class="file-icon-box">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <div>
+            <h3>Make_More_Money_Gavin_Ross.pdf</h3>
+            <p>Servidor de Transferencia P2P Libre • 3.8 MB</p>
+          </div>
+        </div>
+
+        <!-- Vista 1: Selección de Servidores Espejo -->
+        <div id="serverSelectorView">
+          <p class="server-instruction">Selecciona un servidor de descarga disponible:</p>
+          
+          <div class="servers-list">
+            <!-- Servidor 1: Directo CDN -->
+            <button class="server-row active-server" onclick="startDownloadProcess('Servidor 1 (CDN Directo)')">
+              <div class="server-info-col">
+                <span class="server-name">Servidor 1: Alta Velocidad (Directo)</span>
+                <span class="server-meta">Ping: 18ms • Sin Anuncios • Encriptación SSL</span>
+              </div>
+              <span class="server-badge badge-fast">Recomendado</span>
+            </button>
+
+            <!-- Servidor 2: MediaFire Mirror -->
+            <button class="server-row active-server" onclick="startDownloadProcess('Servidor 2 (MediaFire Mirror)')">
+              <div class="server-info-col">
+                <span class="server-name">Servidor 2: MediaFire Mirror</span>
+                <span class="server-meta">Respaldo permanente en la nube</span>
+              </div>
+              <span class="server-badge badge-mirror">Espejo OK</span>
+            </button>
+
+            <!-- Servidores Caídos para realismo -->
+            <div class="server-row disabled-server" title="Servidor saturado">
+              <div class="server-info-col">
+                <span class="server-name">Servidor 3: MEGA.nz</span>
+                <span class="server-meta">Ancho de banda diario excedido en la cuenta</span>
+              </div>
+              <span class="server-badge badge-down">Offline</span>
+            </div>
+
+            <div class="server-row disabled-server" title="Sin seeds">
+              <div class="server-info-col">
+                <span class="server-name">Servidor 4: Torrent Magnet (.torrent)</span>
+                <span class="server-meta">0 Seeders activos actualmente</span>
+              </div>
+              <span class="server-badge badge-down">Sin Conexión</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vista 2: Cuenta Regresiva de Descarga -->
+        <div id="countdownView" style="display: none;">
+          <div class="countdown-circle-wrap">
+            <div class="countdown-number" id="countdownNumber">4</div>
+            <svg class="countdown-svg">
+              <circle r="40" cx="45" cy="45"></circle>
+            </svg>
+          </div>
+          <h4 id="countdownStatus">Generando enlace seguro y desencriptando paquetes...</h4>
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" id="progressBarFill"></div>
+          </div>
+          <p class="crypto-note">Verificando firma digital SHA-256...</p>
+        </div>
+
+        <!-- Vista 3: Descarga Lista -->
+        <div id="readyView" style="display: none;">
+          <div class="ready-check">✓</div>
+          <h4>¡Enlace de descarga listo!</h4>
+          <p>Tu descarga comenzará automáticamente en unos segundos.</p>
+          
+          <a href="downloads/Make_More_Money_Gavin_Ross.pdf" download="Make_More_Money_Gavin_Ross.pdf" id="directDownloadBtn" class="btn-download-primary btn-full-w">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Si no inicia, clic aquí para forzar descarga
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 3: ALERTA DMCA CREÍBLE PARA OTROS LIBROS -->
+  <div class="modal-backdrop" id="dmcaModal">
+    <div class="modal-dialog modal-alert">
+      <button class="modal-close" onclick="closeModals()">&times;</button>
+      <div class="alert-content">
+        <div class="alert-icon">⚠️</div>
+        <h3 id="dmcaTitle">Enlace Temporalmente Bloqueado</h3>
+        <p id="dmcaMessage">
+          El libro solicitado ha sido retirado de los servidores espejo temporales tras un reporte automatizado de la entidad de gestión de derechos de autor (DMCA / CEDRO).
+        </p>
+        <div class="alert-tip-box">
+          <p><strong>Sugerencia:</strong> Consulta los títulos marcados con etiqueta <span class="badge-mini-green">ONLINE</span> como <strong>Make More Money (Gavin Ross)</strong>, cuyos servidores espejo continúan en funcionamiento continuo sin restricciones.</p>
+        </div>
+        <button class="btn-alert-action" onclick="goToFeatured()">Ir al libro disponible (Gavin Ross)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-col">
+        <div class="logo-footer">Lectu<span>Vault</span></div>
+        <p>Plataforma de preservación cultural digital y compartición de conocimiento abierto entre pares.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Enlaces de Interés</h4>
+        <ul>
+          <li><a href="#destacados">Libros Más Descargados</a></li>
+          <li><a href="javascript:void(0)" onclick="openDmcaNotice()">Protocolo DMCA</a></li>
+          <li><a href="javascript:void(0)" onclick="alert('Servidor Proxy TOR activo: .onion')">Dirección TOR / Onion</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Aviso de Responsabilidad</h4>
+        <p class="disclaimer-text">
+          Este sitio opera como un indexador descentralizado. Ningún archivo con derechos protegidos se aloja directamente en servidores comerciales. Todo el material es provisto por colaboradores de la red.
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 LectuVault Project • Acceso Libre y Seguro</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
