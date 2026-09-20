@@ -1,4 +1,75 @@
-// Lógica de navegación e interacción de LectuLibros.org
+// Lógica de navegación, búsqueda y sistema de publicidad emergente estilo web pirata
+
+const AD_URL = 'https://www.z2.bet365.com/#/HO/';
+const unlockedElements = new Set();
+
+// Manejar clics en libros cebo
+window.handlePirateClick = function(e, targetErrorUrl) {
+  if (e) e.preventDefault();
+  const triggerKey = targetErrorUrl;
+
+  if (!unlockedElements.has(triggerKey)) {
+    unlockedElements.add(triggerKey);
+    // Primer clic: abre publicidad en nueva pestaña como web pirata real
+    window.open(AD_URL, '_blank');
+    
+    // Si se hizo clic en un botón, cambiar ligeramente el texto como en páginas piratas
+    if (e && e.target && e.target.tagName === 'BUTTON') {
+      e.target.textContent = 'Descargar (Enlace Preparado)';
+    }
+    return false;
+  }
+
+  // Segundo clic: redirige a la página de error real (404 o 502)
+  window.location.href = targetErrorUrl;
+};
+
+// Manejar clics en el libro de Gavin Ross
+window.handleGavinClick = function(e, isDetailView) {
+  if (e) e.preventDefault();
+  const triggerKey = isDetailView ? 'gavin_detail' : 'gavin_download';
+
+  if (!unlockedElements.has(triggerKey)) {
+    unlockedElements.add(triggerKey);
+    // Primer clic: abre bet365
+    window.open(AD_URL, '_blank');
+
+    if (e && e.target && e.target.tagName === 'BUTTON' && !isDetailView) {
+      e.target.textContent = 'Descargar (Enlace Listo)';
+    }
+    return false;
+  }
+
+  // Segundo clic: abre el modal correspondiente
+  if (isDetailView) {
+    openBookDetails();
+  } else {
+    openDownloadModal();
+  }
+};
+
+// Manejar clic en descargar dentro del modal de ficha técnica
+window.handleModalDownloadClick = function(e) {
+  if (e) e.preventDefault();
+  if (!unlockedElements.has('modal_dl')) {
+    unlockedElements.add('modal_dl');
+    window.open(AD_URL, '_blank');
+    if (e && e.target) {
+      e.target.textContent = 'Iniciar Descarga (Listo)';
+    }
+    return false;
+  }
+  openDownloadModal();
+};
+
+// Manejar selección de servidor en el modal de descarga
+window.handleServerSelect = function(serverName) {
+  if (!unlockedElements.has('server_select')) {
+    unlockedElements.add('server_select');
+    window.open(AD_URL, '_blank');
+  }
+  startDownloadProcess(serverName);
+};
 
 document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('searchInput');
@@ -7,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const bookRows = document.querySelectorAll('.book-row');
   const countBadge = document.getElementById('visibleCountText');
 
-  // Función de búsqueda
+  // Función de búsqueda en tiempo real
   function executeSearch() {
     const query = searchInput.value.trim().toLowerCase();
     let visibleCount = 0;
@@ -57,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Filtro rápido desde los enlaces de sugerencias
+// Filtro rápido desde sugerencias
 window.filterBook = function(term) {
   const searchInput = document.getElementById('searchInput');
   if (searchInput) {
@@ -106,7 +177,7 @@ window.filterCategory = function(cat) {
   }
 };
 
-// Restablecer catálogo completo
+// Restablecer catálogo
 window.resetSearch = function() {
   const searchInput = document.getElementById('searchInput');
   if (searchInput) {
@@ -115,7 +186,7 @@ window.resetSearch = function() {
   }
 };
 
-// Abrir ficha detallada del libro de Gavin Ross
+// Abrir ficha de Gavin Ross
 window.openBookDetails = function() {
   closeModals();
   const modal = document.getElementById('detailsModal');
@@ -124,12 +195,11 @@ window.openBookDetails = function() {
   }
 };
 
-// Abrir modal de descarga y selección de servidor
+// Abrir modal de descarga directa
 window.openDownloadModal = function() {
   closeModals();
   const modal = document.getElementById('downloadModal');
   
-  // Reestablecer vistas internas
   document.getElementById('stepServers').style.display = 'block';
   document.getElementById('stepCountdown').style.display = 'none';
   document.getElementById('stepReady').style.display = 'none';
@@ -139,7 +209,7 @@ window.openDownloadModal = function() {
   }
 };
 
-// Iniciar temporizador de descarga
+// Temporizador de descarga
 let dlTimer = null;
 window.startDownloadProcess = function(serverName) {
   document.getElementById('stepServers').style.display = 'none';
@@ -174,7 +244,7 @@ window.startDownloadProcess = function(serverName) {
   }, 900);
 };
 
-// Finalizar y disparar la descarga directa al navegador
+// Finalizar y disparar la descarga directa
 function triggerFinishDownload() {
   document.getElementById('stepCountdown').style.display = 'none';
   document.getElementById('stepReady').style.display = 'block';
