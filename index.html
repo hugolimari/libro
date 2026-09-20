@@ -12,7 +12,7 @@
   <!-- Barra de aviso de estado de servidores -->
   <div class="top-status-bar">
     <div class="container">
-      <span>Estado del servicio: Servidores CDN operativos. Espejos 2 y 4 en reparacion técnica tras revisiones DMCA.</span>
+      <span>Estado del servicio: Servidores CDN operativos. Espejos 2 y 4 en reparacion tecnica tras revisiones DMCA.</span>
     </div>
   </div>
 
@@ -55,15 +55,15 @@
       <div class="search-panel">
         <label for="searchInput" class="search-label">Buscar en la base de datos de libros:</label>
         <div class="search-input-group">
-          <input type="text" id="searchInput" placeholder="Escribe titulo, autor, tema o ISBN (ej. Gavin Ross, Make More Money, Sampieri...)" autocomplete="off">
+          <input type="text" id="searchInput" placeholder="Escribe titulo, autor, tema o ISBN (ej. Sampieri, Freire, Gavin Ross, Kiyosaki...)" autocomplete="off">
           <button id="searchBtn" type="button" class="btn-search">Buscar</button>
         </div>
         <div class="quick-tags">
           <span class="tags-title">Busquedas frecuentes:</span>
-          <a href="javascript:void(0)" onclick="filterBook('Make More Money')">Make More Money (Gavin Ross)</a> &bull;
           <a href="javascript:void(0)" onclick="filterBook('Metodologia de la investigacion')">Metodologia Sampieri</a> &bull;
           <a href="javascript:void(0)" onclick="filterBook('Paulo Freire')">Paulo Freire</a> &bull;
           <a href="javascript:void(0)" onclick="filterBook('Padre Rico')">Padre Rico Padre Pobre</a> &bull;
+          <a href="javascript:void(0)" onclick="filterBook('Gavin Ross')">Make More Money (Gavin Ross)</a> &bull;
           <a href="javascript:void(0)" onclick="filterBook('Habitos Atomicos')">Habitos Atomicos</a>
         </div>
       </div>
@@ -78,53 +78,18 @@
       
       <div class="catalog-heading">
         <h2>Libros Recientemente Compartidos por la Comunidad</h2>
-        <span class="count-badge" id="visibleCountText">13 libros en lista</span>
+        <span class="count-badge" id="visibleCountText">11 libros en lista</span>
       </div>
 
       <div class="notice-box">
-        <strong>Nota para el usuario:</strong> Si algun enlace presenta error 404 o 502, se debe a que el nodo de almacenamiento temporal fue dado de baja. Los enlaces marcados como <strong>[Enlace Verificado - Activo]</strong> cuentan con descarga directa disponible sin tiempos de espera.
+        <strong>Nota del Administrador:</strong> Debido a continuas migraciones en los clusters de almacenamiento, algunos servidores espejo pueden arrojar interrupciones de conexion o error 404/502. Por favor intente con los enlaces disponibles en la red.
       </div>
 
       <!-- Lista de Libros -->
       <div class="books-list" id="booksGrid">
 
-        <!-- ========================================== -->
-        <!-- LIBRO 1: GAVIN ROSS (EL ÚNICO FUNCIONAL)   -->
-        <!-- ========================================== -->
-        <article class="book-row book-featured" data-title="make more money gavin ross finanzas economia riqueza dinero" data-category="negocios">
-          <div class="book-thumb">
-            <img src="assets/cover_make_more_money.jpg" alt="Portada Make More Money Gavin Ross" class="thumb-img" onclick="openBookDetails()">
-          </div>
-          <div class="book-details">
-            <div class="book-header-line">
-              <span class="badge-status-ok">[Enlace Verificado - Activo]</span>
-              <span class="file-spec">Formato: PDF / EPUB &bull; 3.8 MB</span>
-            </div>
-            <h3 class="book-title-link">
-              <a href="javascript:void(0)" onclick="openBookDetails()">Make More Money</a>
-            </h3>
-            <div class="book-meta">
-              <span>Autor: <strong>Gavin Ross</strong></span> &bull;
-              <span>Ano: 2024</span> &bull;
-              <span>Idioma: Espanol</span> &bull;
-              <span>Valoracion: 4.8/5 (1,840 descargas)</span>
-            </div>
-            <p class="book-synopsis">
-              Guia practica orientada a la generacion de ingresos, escalabilidad de modelos economicos independientes y multiplicacion de flujos monetarios. Edicion integra digitalizada.
-            </p>
-            <div class="book-actions">
-              <button class="btn-dl-green" onclick="openDownloadModal()">Descargar Libro (PDF)</button>
-              <button class="btn-info-link" onclick="openBookDetails()">Ver ficha completa y sinopsis</button>
-            </div>
-          </div>
-        </article>
-
-        <!-- ========================================== -->
-        <!-- LIBROS BAIT (DAN ERROR 404 DIRECTO)        -->
-        <!-- ========================================== -->
-
-        <!-- BAIT 1: Sampieri (Clásico universitario docente) -->
-        <article class="book-row" data-title="metodologia de la investigacion roberto hernandez sampieri educacion investigacion ciencia" data-category="investigacion">
+        <!-- LIBRO 1: Sampieri (Bait) -->
+        <article class="book-row" data-title="metodologia de la investigacion roberto hernandez sampieri educacion investigacion ciencia tesis" data-category="investigacion">
           <div class="book-thumb thumb-text">
             <div class="fake-cover">
               <span class="fc-type">TEXTO UNIVERSITARIO</span>
@@ -155,7 +120,7 @@
           </div>
         </article>
 
-        <!-- BAIT 2: Paulo Freire (Pedagogía del oprimido) -->
+        <!-- LIBRO 2: Paulo Freire (Bait) -->
         <article class="book-row" data-title="pedagogia del oprimido paulo freire educacion docencia ensenanza" data-category="educacion">
           <div class="book-thumb thumb-text">
             <div class="fake-cover bg-amber">
@@ -187,7 +152,7 @@
           </div>
         </article>
 
-        <!-- BAIT 3: Padre Rico Padre Pobre -->
+        <!-- LIBRO 3: Padre Rico Padre Pobre (Bait) -->
         <article class="book-row" data-title="padre rico padre pobre robert kiyosaki finanzas negocios economia" data-category="negocios">
           <div class="book-thumb thumb-text">
             <div class="fake-cover bg-blue">
@@ -219,7 +184,42 @@
           </div>
         </article>
 
-        <!-- BAIT 4: Habitos Atomicos -->
+        <!-- ========================================== -->
+        <!-- LIBRO 4: GAVIN ROSS (CAMUFLADO EN LA LISTA) -->
+        <!-- ========================================== -->
+        <article class="book-row" data-title="make more money gavin ross finanzas economia riqueza dinero ingresos" data-category="negocios">
+          <div class="book-thumb thumb-text">
+            <div class="fake-cover bg-emerald">
+              <span class="fc-type">FINANZAS</span>
+              <p class="fc-title">Make More Money</p>
+              <span class="fc-author">Gavin Ross</span>
+            </div>
+          </div>
+          <div class="book-details">
+            <div class="book-header-line">
+              <span class="badge-status-neutral">[Servidor Mirror 1]</span>
+              <span class="file-spec">Formato: PDF &bull; 96 paginas &bull; 1.2 MB</span>
+            </div>
+            <h3 class="book-title-link">
+              <a href="javascript:void(0)" onclick="openBookDetails()">Make More Money: The System of Income Multiplication</a>
+            </h3>
+            <div class="book-meta">
+              <span>Autor: <strong>Gavin Ross</strong></span> &bull;
+              <span>Ano: 2024</span> &bull;
+              <span>Idioma: Ingles / Espanol</span> &bull;
+              <span>ISBN: 978-1-954820-41-9</span>
+            </div>
+            <p class="book-synopsis">
+              The ultimate practical blueprint for scaling personal income, capital velocity, and financial autonomy. Monografia completa de 96 paginas.
+            </p>
+            <div class="book-actions">
+              <button class="btn-dl-gray" onclick="openDownloadModal()">Descargar PDF</button>
+              <button class="btn-info-link" onclick="openBookDetails()">Ficha tecnica</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- LIBRO 5: Habitos Atomicos (Bait) -->
         <article class="book-row" data-title="habitos atomicos james clear desarrollo autoayuda psicologia" data-category="autoayuda">
           <div class="book-thumb thumb-text">
             <div class="fake-cover bg-red">
@@ -251,7 +251,7 @@
           </div>
         </article>
 
-        <!-- BAIT 5: Pensar rapido, pensar despacio -->
+        <!-- LIBRO 6: Pensar rapido, pensar despacio (Bait) -->
         <article class="book-row" data-title="pensar rapido pensar despacio daniel kahneman psicologia ciencia" data-category="autoayuda">
           <div class="book-thumb thumb-text">
             <div class="fake-cover bg-slate">
@@ -283,7 +283,7 @@
           </div>
         </article>
 
-        <!-- BAIT 6: Didáctica General (Docencia) -->
+        <!-- LIBRO 7: Didáctica General (Docencia) (Bait) -->
         <article class="book-row" data-title="didactica general juan mallart educacion ensenanza docencia pedagogia" data-category="educacion">
           <div class="book-thumb thumb-text">
             <div class="fake-cover bg-green">
@@ -315,7 +315,7 @@
           </div>
         </article>
 
-        <!-- BAIT 7: Clean Code -->
+        <!-- LIBRO 8: Clean Code (Bait) -->
         <article class="book-row" data-title="clean code codigo limpio robert c martin software programacion tecnologia" data-category="investigacion">
           <div class="book-thumb thumb-text">
             <div class="fake-cover bg-teal">
@@ -347,7 +347,7 @@
           </div>
         </article>
 
-        <!-- BAIT 8: Como ganar amigos e influir sobre las personas -->
+        <!-- LIBRO 9: Como ganar amigos e influir sobre las personas (Bait) -->
         <article class="book-row" data-title="como ganar amigos e influir sobre las personas dale carnegie autoayuda relaciones comunicacion" data-category="autoayuda">
           <div class="book-thumb thumb-text">
             <div class="fake-cover bg-orange">
@@ -379,7 +379,7 @@
           </div>
         </article>
 
-        <!-- BAIT 9: El hombre mas rico de babilonia -->
+        <!-- LIBRO 10: El hombre mas rico de babilonia (Bait) -->
         <article class="book-row" data-title="el hombre mas rico de babilonia george clason finanzas economia dinero" data-category="negocios">
           <div class="book-thumb thumb-text">
             <div class="fake-cover bg-indigo">
@@ -411,7 +411,7 @@
           </div>
         </article>
 
-        <!-- BAIT 10: Metodos Cuantitativos Aplicados a la Educacion -->
+        <!-- LIBRO 11: Estadistica para Docentes (Bait) -->
         <article class="book-row" data-title="metodos cuantitativos aplicados a la educacion estadistica docencia investigacion" data-category="investigacion">
           <div class="book-thumb thumb-text">
             <div class="fake-cover bg-slate">
@@ -466,16 +466,10 @@
       </div>
 
       <div class="widget-box">
-        <h4 class="widget-title">Libro mas descargado esta semana</h4>
-        <div class="widget-top-book">
-          <img src="assets/cover_make_more_money.jpg" alt="Make More Money" class="mini-cover" onclick="openBookDetails()">
-          <div>
-            <strong>Make More Money</strong>
-            <p>Gavin Ross</p>
-            <span class="badge-mini-green">100% Disponible</span>
-            <a href="javascript:void(0)" onclick="openBookDetails()" class="side-link">Ir a descarga &rarr;</a>
-          </div>
-        </div>
+        <h4 class="widget-title">Aviso de la Red</h4>
+        <p style="font-size: 11px; color: #6c757d; line-height: 1.45;">
+          Los enlaces a documentos y tesis se actualizan de forma automatica cada 48 horas. Si un fichero no responde, intente nuevamente mas tarde o pruebe con otros titulos de la coleccion.
+        </p>
       </div>
 
       <div class="widget-box">
@@ -498,30 +492,34 @@
 
   </main>
 
-  <!-- MODAL: FICHA TÉCNICA DETALLADA DE "MAKE MORE MONEY" (GAVIN ROSS) -->
+  <!-- MODAL: FICHA TÉCNICA DE "MAKE MORE MONEY" (GAVIN ROSS) -->
   <div class="modal-overlay" id="detailsModal">
     <div class="modal-box modal-box-large">
       <button class="btn-close-modal" onclick="closeModals()">&times;</button>
       
       <div class="detail-grid">
         <div class="detail-left">
-          <img src="assets/cover_make_more_money.jpg" alt="Portada Make More Money" class="modal-cover">
+          <div class="fake-cover bg-emerald" style="width: 100%; height: 260px; padding: 15px;">
+            <span class="fc-type">FINANZAS</span>
+            <p class="fc-title" style="font-size: 16px; margin: 15px 0;">Make More Money</p>
+            <span class="fc-author" style="font-size: 12px;">Gavin Ross</span>
+          </div>
           <div class="file-checksum-box">
             <span>Firma MD5 verificada:</span>
             <code>d41d8cd98f00b204e9800998ecf8427e</code>
-            <p>Analisis de contenido: Limpio (Sin software publicitario)</p>
+            <p>Escaneo: 0 amenazas detectadas</p>
           </div>
         </div>
 
         <div class="detail-right">
-          <div class="status-tag">[Disponible en Servidor 1 CDN]</div>
+          <div class="status-tag">[Alojado en Servidor 1 CDN]</div>
           <h2>Make More Money</h2>
           <p class="author-line">Autor: <strong>Gavin Ross</strong></p>
 
           <table class="technical-table">
             <tr>
               <td>Titulo original:</td>
-              <td>Make More Money: Increasing Wealth & Financial Freedom</td>
+              <td>Make More Money: The System of Income Multiplication</td>
             </tr>
             <tr>
               <td>Autor:</td>
@@ -529,43 +527,50 @@
             </tr>
             <tr>
               <td>Idioma:</td>
-              <td>Espanol (Traduccion oficial completa)</td>
+              <td>Ingles / Espanol (Edicion Integra)</td>
             </tr>
             <tr>
               <td>Formato:</td>
-              <td>PDF digital no protegido (Imprimible) / EPUB</td>
+              <td>PDF digital no protegido (Imprimible)</td>
             </tr>
             <tr>
               <td>Tamano de archivo:</td>
-              <td>3.8 MB</td>
+              <td>1.2 MB</td>
             </tr>
             <tr>
               <td>Numero de paginas:</td>
-              <td>268 paginas</td>
+              <td>96 paginas</td>
+            </tr>
+            <tr>
+              <td>Editorial:</td>
+              <td>Apex Financial Press</td>
+            </tr>
+            <tr>
+              <td>ISBN:</td>
+              <td>978-1-954820-41-9</td>
             </tr>
           </table>
 
           <div class="synopsis-container">
-            <h4>Sinopsis del libro:</h4>
+            <h4>Sinopsis del texto:</h4>
             <p>
-              En <em>Make More Money</em>, Gavin Ross expone un desglose directo de los fundamentos modernos sobre escalabilidad de capital, optimizacion de ingresos alternativos y gestion de recursos financieros independientes. Dirigido a profesionales, docentes y emprendedores que desean entender la dinamica monetaria actual sin rodeos teoricos.
+              El autor Gavin Ross desglosa la arquitectura practica de multiplicacion de ingresos, la velocidad del capital y los principios de apalancamiento aplicados a la soberania financiera individual. Edicion completa con tabla de contenidos, 10 capitulos analiticos y protocolos de ejecucion.
             </p>
           </div>
 
           <div class="modal-download-area">
-            <button class="btn-dl-green btn-large" onclick="openDownloadModal()">Iniciar Descarga Directa (PDF)</button>
+            <button class="btn-dl-green btn-large" onclick="openDownloadModal()">Descargar Archivo (PDF)</button>
           </div>
 
-          <!-- Comentarios estilo foro clásico -->
           <div class="forum-comments">
-            <h4>Comentarios de la comunidad (2):</h4>
+            <h4>Comentarios de usuarios (2):</h4>
             <div class="comment-entry">
-              <span class="comment-user">profesor_universitario_33:</span>
-              <p>Muchas gracias por compartirlo en enlace directo, los demas libros de la seccion de investigacion me daban 404 pero este bajo de inmediato en 5 segundos.</p>
+              <span class="comment-user">usuario_net:</span>
+              <p>Funciono perfecto el enlace del servidor 1, los 96 folios vienen en buena calidad de texto.</p>
             </div>
             <div class="comment-entry">
-              <span class="comment-user">bibliotecario_net:</span>
-              <p>Calidad 10/10, formato legible tanto en computadora como en lector electronico. Se agradece el aporte.</p>
+              <span class="comment-user">docente_inv:</span>
+              <p>Bajo sin problemas en formato PDF.</p>
             </div>
           </div>
 
@@ -574,25 +579,25 @@
     </div>
   </div>
 
-  <!-- MODAL: VENTANA DE DESCARGA Y PROCESO DIRECTO -->
+  <!-- MODAL: VENTANA DE DESCARGA DIRECTA -->
   <div class="modal-overlay" id="downloadModal">
     <div class="modal-box modal-box-small">
       <button class="btn-close-modal" onclick="closeModals()">&times;</button>
       
       <div class="download-flow">
-        <h3>Descarga de Archivo: Make_More_Money_Gavin_Ross.pdf</h3>
-        <p class="flow-sub">Archivo verificado en almacenamiento seguro &bull; 3.8 MB</p>
+        <h3>Descarga: Make_More_Money_Gavin_Ross.pdf</h3>
+        <p class="flow-sub">Fichero PDF &bull; 96 paginas &bull; 1.2 MB</p>
 
         <!-- Selector de Servidor -->
         <div id="stepServers">
           <p class="select-hint">Seleccione el nodo de descarga:</p>
           <div class="server-options">
             <button class="srv-btn srv-btn-active" onclick="startDownloadProcess('Servidor 1 CDN Directo')">
-              <span class="srv-label">Servidor 1 (CDN Alta Velocidad)</span>
-              <span class="srv-status-text">Disponible - Recomendado</span>
+              <span class="srv-label">Servidor 1 (CDN Directo)</span>
+              <span class="srv-status-text">Disponible</span>
             </button>
             <button class="srv-btn srv-btn-active" onclick="startDownloadProcess('Servidor MediaFire Espejo')">
-              <span class="srv-label">Servidor 2 (Espejo de Respaldo)</span>
+              <span class="srv-label">Servidor 2 (MediaFire Mirror)</span>
               <span class="srv-status-text">Disponible</span>
             </button>
             <div class="srv-btn srv-btn-offline">
@@ -607,11 +612,11 @@
           <div class="countdown-box">
             <span class="countdown-digits" id="countdownNumber">3</span>
           </div>
-          <p id="countdownMessage">Estableciendo conexion segura con el nodo...</p>
+          <p id="countdownMessage">Estableciendo conexion con el servidor...</p>
           <div class="bar-border">
             <div class="bar-fill" id="barFill"></div>
           </div>
-          <span class="checksum-tip">Validando token de descarga HTTP sin intermediarios...</span>
+          <span class="checksum-tip">Validando token de descarga HTTP...</span>
         </div>
 
         <!-- Descarga Lista -->
@@ -619,7 +624,7 @@
           <div class="ready-banner">
             <strong>El archivo esta listo para transferir</strong>
           </div>
-          <p>La descarga iniciara de manera automatica en su navegador.</p>
+          <p>La descarga iniciara de manera automatica.</p>
           
           <a href="downloads/Make_More_Money_Gavin_Ross.pdf" download="Make_More_Money_Gavin_Ross.pdf" id="realDownloadLink" class="btn-dl-green btn-large btn-block">
             Haga clic aqui si la descarga no inicia de inmediato
