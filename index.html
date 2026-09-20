@@ -43,7 +43,7 @@
           <li><a href="javascript:void(0)" onclick="filterCategory('negocios')">Economia y Finanzas</a></li>
           <li><a href="javascript:void(0)" onclick="filterCategory('investigacion')">Investigacion y Ciencia</a></li>
           <li><a href="javascript:void(0)" onclick="filterCategory('autoayuda')">Desarrollo y Psicologia</a></li>
-          <li><a href="javascript:void(0)" onclick="handlePirateClick(event, 'error-502.html')">Peticiones de Libros</a></li>
+          <li><a href="javascript:void(0)" onclick="handleBrokenBook(event, 'error-502.html')">Peticiones de Libros</a></li>
         </ul>
       </div>
     </nav>
@@ -55,16 +55,16 @@
       <div class="search-panel">
         <label for="searchInput" class="search-label">Buscar en la base de datos de libros:</label>
         <div class="search-input-group">
-          <input type="text" id="searchInput" placeholder="Escribe titulo, autor, tema o ISBN (ej. Sampieri, Freire, Diaz-Barriga, Gavin Ross...)" autocomplete="off">
+          <input type="text" id="searchInput" placeholder="Escribe titulo, autor, tema o ISBN (ej. Sampieri, Freire, Gavin Ross, Kiyosaki...)" autocomplete="off">
           <button id="searchBtn" type="button" class="btn-search">Buscar</button>
         </div>
         <div class="quick-tags">
           <span class="tags-title">Busquedas frecuentes:</span>
           <a href="javascript:void(0)" onclick="filterBook('Metodologia de la investigacion')">Metodologia Sampieri</a> &bull;
-          <a href="javascript:void(0)" onclick="filterBook('Diaz-Barriga')">Estrategias Docentes</a> &bull;
           <a href="javascript:void(0)" onclick="filterBook('Paulo Freire')">Paulo Freire</a> &bull;
+          <a href="javascript:void(0)" onclick="filterBook('Padre Rico')">Padre Rico Padre Pobre</a> &bull;
           <a href="javascript:void(0)" onclick="filterBook('Gavin Ross')">Make More Money (Gavin Ross)</a> &bull;
-          <a href="javascript:void(0)" onclick="filterBook('Padre Rico')">Padre Rico Padre Pobre</a>
+          <a href="javascript:void(0)" onclick="filterBook('Habitos Atomicos')">Habitos Atomicos</a>
         </div>
       </div>
     </div>
@@ -78,7 +78,7 @@
       
       <div class="catalog-heading">
         <h2>Libros Recientemente Compartidos por la Comunidad</h2>
-        <span class="count-badge" id="visibleCountText">13 libros en lista</span>
+        <span class="count-badge" id="visibleCountText">11 libros en lista</span>
       </div>
 
       <div class="notice-box">
@@ -88,9 +88,9 @@
       <!-- Lista de Libros -->
       <div class="books-list" id="booksGrid">
 
-        <!-- LIBRO 1: Sampieri (Bait) -->
+        <!-- LIBRO 1: Sampieri (Bait - Caído) -->
         <article class="book-row" data-title="metodologia de la investigacion roberto hernandez sampieri educacion investigacion ciencia tesis" data-category="investigacion">
-          <div class="book-thumb thumb-text" onclick="handlePirateClick(event, 'error-404.html?file=sampieri_metodologia_investigacion_6ta_ed.pdf')">
+          <div class="book-thumb thumb-text" onclick="handleBrokenBook(event, 'error-404.html?file=sampieri_metodologia_investigacion_6ta_ed.pdf')">
             <div class="fake-cover">
               <span class="fc-type">TEXTO UNIVERSITARIO</span>
               <p class="fc-title">Metodologia de la Investigacion</p>
@@ -103,7 +103,7 @@
               <span class="file-spec">Formato: PDF &bull; 18.4 MB</span>
             </div>
             <h3 class="book-title-link">
-              <a href="javascript:void(0)" onclick="handlePirateClick(event, 'error-404.html?file=sampieri_metodologia_investigacion_6ta_ed.pdf')">Metodologia de la Investigacion (6ta Edicion)</a>
+              <a href="javascript:void(0)" onclick="handleBrokenBook(event, 'error-404.html?file=sampieri_metodologia_investigacion_6ta_ed.pdf')">Metodologia de la Investigacion (6ta Edicion)</a>
             </h3>
             <div class="book-meta">
               <span>Autor: <strong>Roberto Hernandez Sampieri</strong></span> &bull;
@@ -114,14 +114,14 @@
               Manual de referencia para tesis universitarias y recopilacion de metodologias cualitativas y cuantitativas.
             </p>
             <div class="book-actions">
-              <button class="btn-dl-gray" onclick="handlePirateClick(event, 'error-404.html?file=sampieri_metodologia_investigacion_6ta_ed.pdf')">Descargar PDF</button>
+              <button class="btn-dl-gray" onclick="handleBrokenBook(event, 'error-404.html?file=sampieri_metodologia_investigacion_6ta_ed.pdf')">Descargar PDF</button>
             </div>
           </div>
         </article>
 
-        <!-- LIBRO 2: Paulo Freire (Bait) -->
+        <!-- LIBRO 2: Paulo Freire (ACTIVO - DESCARGABLE) -->
         <article class="book-row" data-title="pedagogia del oprimido paulo freire educacion docencia ensenanza" data-category="educacion">
-          <div class="book-thumb thumb-text" onclick="handlePirateClick(event, 'error-502.html?ref=freire_pedagogia_oprimido.pdf')">
+          <div class="book-thumb thumb-text" onclick="handleDownloadBook(event, 'Pedagogia_del_Oprimido_Paulo_Freire.pdf', 'downloads/Pedagogia_del_Oprimido_Paulo_Freire.pdf', 'Fichero PDF &bull; 22 paginas &bull; 1.1 MB')">
             <div class="fake-cover bg-amber">
               <span class="fc-type">PEDAGOGIA</span>
               <p class="fc-title">Pedagogia del Oprimido</p>
@@ -131,10 +131,10 @@
           <div class="book-details">
             <div class="book-header-line">
               <span class="badge-status-neutral">[Servidor Mirror 2]</span>
-              <span class="file-spec">Formato: PDF &bull; 4.1 MB</span>
+              <span class="file-spec">Formato: PDF &bull; 1.1 MB</span>
             </div>
             <h3 class="book-title-link">
-              <a href="javascript:void(0)" onclick="handlePirateClick(event, 'error-502.html?ref=freire_pedagogia_oprimido.pdf')">Pedagogia del Oprimido</a>
+              <a href="javascript:void(0)" onclick="handleDownloadBook(event, 'Pedagogia_del_Oprimido_Paulo_Freire.pdf', 'downloads/Pedagogia_del_Oprimido_Paulo_Freire.pdf', 'Fichero PDF &bull; 22 paginas &bull; 1.1 MB')">Pedagogia del Oprimido</a>
             </h3>
             <div class="book-meta">
               <span>Autor: <strong>Paulo Freire</strong></span> &bull;
@@ -142,17 +142,17 @@
               <span>Idioma: Espanol</span>
             </div>
             <p class="book-synopsis">
-              Ensayo fundamental sobre la dinamica pedagogica, la concienciacion docente y los procesos de liberacion formativa.
+              Ensayo fundamental sobre la dinamica pedagogica, la concienciacion docente y los procesos de liberacion formativa. Edicion de lectura formativa.
             </p>
             <div class="book-actions">
-              <button class="btn-dl-gray" onclick="handlePirateClick(event, 'error-502.html?ref=freire_pedagogia_oprimido.pdf')">Descargar PDF</button>
+              <button class="btn-dl-gray" onclick="handleDownloadBook(event, 'Pedagogia_del_Oprimido_Paulo_Freire.pdf', 'downloads/Pedagogia_del_Oprimido_Paulo_Freire.pdf', 'Fichero PDF &bull; 22 paginas &bull; 1.1 MB')">Descargar PDF</button>
             </div>
           </div>
         </article>
 
-        <!-- LIBRO 3: Padre Rico Padre Pobre (Bait) -->
+        <!-- LIBRO 3: Padre Rico Padre Pobre (ACTIVO - DESCARGABLE) -->
         <article class="book-row" data-title="padre rico padre pobre robert kiyosaki finanzas negocios economia" data-category="negocios">
-          <div class="book-thumb thumb-text" onclick="handlePirateClick(event, 'error-404.html?file=padre_rico_padre_pobre_kiyosaki.pdf')">
+          <div class="book-thumb thumb-text" onclick="handleDownloadBook(event, 'Padre_Rico_Padre_Pobre_Robert_Kiyosaki.pdf', 'downloads/Padre_Rico_Padre_Pobre_Robert_Kiyosaki.pdf', 'Fichero PDF &bull; 24 paginas &bull; 1.4 MB')">
             <div class="fake-cover bg-blue">
               <span class="fc-type">FINANZAS</span>
               <p class="fc-title">Padre Rico, Padre Pobre</p>
@@ -161,31 +161,29 @@
           </div>
           <div class="book-details">
             <div class="book-header-line">
-              <span class="badge-status-neutral">[Servidor Mega/Mirror]</span>
-              <span class="file-spec">Formato: PDF / EPUB &bull; 5.2 MB</span>
+              <span class="badge-status-neutral">[Servidor Mirror 3]</span>
+              <span class="file-spec">Formato: PDF &bull; 1.4 MB</span>
             </div>
             <h3 class="book-title-link">
-              <a href="javascript:void(0)" onclick="handlePirateClick(event, 'error-404.html?file=padre_rico_padre_pobre_kiyosaki.pdf')">Padre Rico, Padre Pobre (Edicion 25 Aniversario)</a>
+              <a href="javascript:void(0)" onclick="handleDownloadBook(event, 'Padre_Rico_Padre_Pobre_Robert_Kiyosaki.pdf', 'downloads/Padre_Rico_Padre_Pobre_Robert_Kiyosaki.pdf', 'Fichero PDF &bull; 24 paginas &bull; 1.4 MB')">Padre Rico, Padre Pobre (Edicion Digital)</a>
             </h3>
             <div class="book-meta">
               <span>Autor: <strong>Robert T. Kiyosaki</strong></span> &bull;
-              <span>Categoria: Economia Basica</span> &bull;
+              <span>Categoria: Economia y Finanzas</span> &bull;
               <span>Idioma: Espanol</span>
             </div>
             <p class="book-synopsis">
-              Principios sobre el flujo de dinero, activos vs pasivos y la mentalidad financiera de las clases pudientes.
+              Principios sobre el flujo de dinero, la adquisicion de activos productivos frente a pasivos y la mentalidad financiera practica.
             </p>
             <div class="book-actions">
-              <button class="btn-dl-gray" onclick="handlePirateClick(event, 'error-404.html?file=padre_rico_padre_pobre_kiyosaki.pdf')">Descargar PDF</button>
+              <button class="btn-dl-gray" onclick="handleDownloadBook(event, 'Padre_Rico_Padre_Pobre_Robert_Kiyosaki.pdf', 'downloads/Padre_Rico_Padre_Pobre_Robert_Kiyosaki.pdf', 'Fichero PDF &bull; 24 paginas &bull; 1.4 MB')">Descargar PDF</button>
             </div>
           </div>
         </article>
 
-        <!-- ========================================== -->
-        <!-- LIBRO 4: GAVIN ROSS (CAMUFLADO EN LA LISTA) -->
-        <!-- ========================================== -->
+        <!-- LIBRO 4: GAVIN ROSS (ACTIVO - DESCARGABLE) -->
         <article class="book-row" data-title="make more money gavin ross finanzas economia riqueza dinero ingresos" data-category="negocios">
-          <div class="book-thumb thumb-text" onclick="handleGavinClick(event)">
+          <div class="book-thumb thumb-text" onclick="handleDownloadBook(event, 'Make_More_Money_Gavin_Ross.pdf', 'downloads/Make_More_Money_Gavin_Ross.pdf', 'Fichero PDF &bull; 95 paginas &bull; 1.2 MB')">
             <div class="fake-cover bg-emerald">
               <span class="fc-type">FINANZAS</span>
               <p class="fc-title">Make More Money</p>
@@ -198,7 +196,7 @@
               <span class="file-spec">Formato: PDF &bull; 95 paginas &bull; 1.2 MB</span>
             </div>
             <h3 class="book-title-link">
-              <a href="javascript:void(0)" onclick="handleGavinClick(event)">Make More Money: The System of Income Multiplication</a>
+              <a href="javascript:void(0)" onclick="handleDownloadBook(event, 'Make_More_Money_Gavin_Ross.pdf', 'downloads/Make_More_Money_Gavin_Ross.pdf', 'Fichero PDF &bull; 95 paginas &bull; 1.2 MB')">Make More Money: The System of Income Multiplication</a>
             </h3>
             <div class="book-meta">
               <span>Autor: <strong>Gavin Ross</strong></span> &bull;
@@ -209,15 +207,15 @@
               El sistema definitivo para escalar ingresos personales, acelerar la velocidad del capital y consolidar la autonomia financiera. Monografia completa de 95 paginas.
             </p>
             <div class="book-actions">
-              <button class="btn-dl-gray" onclick="handleGavinClick(event)">Descargar PDF</button>
-              <button class="btn-info-link" onclick="handleGavinClick(event, true)">Ficha tecnica</button>
+              <button class="btn-dl-gray" onclick="handleDownloadBook(event, 'Make_More_Money_Gavin_Ross.pdf', 'downloads/Make_More_Money_Gavin_Ross.pdf', 'Fichero PDF &bull; 95 paginas &bull; 1.2 MB')">Descargar PDF</button>
+              <button class="btn-info-link" onclick="handleOpenDetails(event)">Ficha tecnica</button>
             </div>
           </div>
         </article>
 
-        <!-- LIBRO 5: Habitos Atomicos (Bait) -->
+        <!-- LIBRO 5: Habitos Atomicos (Bait - Caído) -->
         <article class="book-row" data-title="habitos atomicos james clear desarrollo autoayuda psicologia" data-category="autoayuda">
-          <div class="book-thumb thumb-text" onclick="handlePirateClick(event, 'error-502.html?ref=habitos_atomicos_james_clear.epub')">
+          <div class="book-thumb thumb-text" onclick="handleBrokenBook(event, 'error-502.html?ref=habitos_atomicos_james_clear.epub')">
             <div class="fake-cover bg-red">
               <span class="fc-type">PSICOLOGIA</span>
               <p class="fc-title">Habitos Atomicos</p>
@@ -230,7 +228,7 @@
               <span class="file-spec">Formato: EPUB &bull; 3.6 MB</span>
             </div>
             <h3 class="book-title-link">
-              <a href="javascript:void(0)" onclick="handlePirateClick(event, 'error-502.html?ref=habitos_atomicos_james_clear.epub')">Habitos Atomicos: Cambios Pequenos, Resultados Extraordinarios</a>
+              <a href="javascript:void(0)" onclick="handleBrokenBook(event, 'error-502.html?ref=habitos_atomicos_james_clear.epub')">Habitos Atomicos: Cambios Pequenos, Resultados Extraordinarios</a>
             </h3>
             <div class="book-meta">
               <span>Autor: <strong>James Clear</strong></span> &bull;
@@ -241,14 +239,14 @@
               Metodologia basada en la psicologia conductual para la instauracion de rutinas solidas y eliminacion de conductas lesivas.
             </p>
             <div class="book-actions">
-              <button class="btn-dl-gray" onclick="handlePirateClick(event, 'error-502.html?ref=habitos_atomicos_james_clear.epub')">Descargar EPUB</button>
+              <button class="btn-dl-gray" onclick="handleBrokenBook(event, 'error-502.html?ref=habitos_atomicos_james_clear.epub')">Descargar EPUB</button>
             </div>
           </div>
         </article>
 
-        <!-- LIBRO 6: Pensar rapido, pensar despacio (Bait) -->
+        <!-- LIBRO 6: Pensar rapido, pensar despacio (Bait - Caído) -->
         <article class="book-row" data-title="pensar rapido pensar despacio daniel kahneman psicologia ciencia" data-category="autoayuda">
-          <div class="book-thumb thumb-text" onclick="handlePirateClick(event, 'error-404.html?file=kahneman_pensar_rapido_despacio.pdf')">
+          <div class="book-thumb thumb-text" onclick="handleBrokenBook(event, 'error-404.html?file=kahneman_pensar_rapido_despacio.pdf')">
             <div class="fake-cover bg-slate">
               <span class="fc-type">ENSAYO</span>
               <p class="fc-title">Pensar Rapido, Pensar Despacio</p>
@@ -261,7 +259,7 @@
               <span class="file-spec">Formato: PDF &bull; 8.1 MB</span>
             </div>
             <h3 class="book-title-link">
-              <a href="javascript:void(0)" onclick="handlePirateClick(event, 'error-404.html?file=kahneman_pensar_rapido_despacio.pdf')">Pensar Rapido, Pensar Despacio</a>
+              <a href="javascript:void(0)" onclick="handleBrokenBook(event, 'error-404.html?file=kahneman_pensar_rapido_despacio.pdf')">Pensar Rapido, Pensar Despacio</a>
             </h3>
             <div class="book-meta">
               <span>Autor: <strong>Daniel Kahneman (Premio Nobel)</strong></span> &bull;
@@ -272,14 +270,14 @@
               Analisis exhaustivo de los dos sistemas que modulan el juicio, la toma de decisiones y los sesgos del pensamiento humano.
             </p>
             <div class="book-actions">
-              <button class="btn-dl-gray" onclick="handlePirateClick(event, 'error-404.html?file=kahneman_pensar_rapido_despacio.pdf')">Descargar PDF</button>
+              <button class="btn-dl-gray" onclick="handleBrokenBook(event, 'error-404.html?file=kahneman_pensar_rapido_despacio.pdf')">Descargar PDF</button>
             </div>
           </div>
         </article>
 
-        <!-- LIBRO 7: Didáctica General (Docencia) (Bait) -->
+        <!-- LIBRO 7: Didáctica General (Docencia) (Bait - Caído) -->
         <article class="book-row" data-title="didactica general juan mallart educacion ensenanza docencia pedagogia" data-category="educacion">
-          <div class="book-thumb thumb-text" onclick="handlePirateClick(event, 'error-404.html?file=didactica_general_mallart_docentes.pdf')">
+          <div class="book-thumb thumb-text" onclick="handleBrokenBook(event, 'error-404.html?file=didactica_general_mallart_docentes.pdf')">
             <div class="fake-cover bg-green">
               <span class="fc-type">DOCENCIA</span>
               <p class="fc-title">Didactica General para Profesores</p>
@@ -292,7 +290,7 @@
               <span class="file-spec">Formato: PDF &bull; 12.0 MB</span>
             </div>
             <h3 class="book-title-link">
-              <a href="javascript:void(0)" onclick="handlePirateClick(event, 'error-404.html?file=didactica_general_mallart_docentes.pdf')">Didactica General: Objetivos y Competencias Docentes</a>
+              <a href="javascript:void(0)" onclick="handleBrokenBook(event, 'error-404.html?file=didactica_general_mallart_docentes.pdf')">Didactica General: Objetivos y Competencias Docentes</a>
             </h3>
             <div class="book-meta">
               <span>Autor: <strong>Juan Mallart</strong></span> &bull;
@@ -303,14 +301,14 @@
               Estrategias de planificacion curricular, evaluacion formativa y gestion del aula para el profesorado de educacion superior.
             </p>
             <div class="book-actions">
-              <button class="btn-dl-gray" onclick="handlePirateClick(event, 'error-404.html?file=didactica_general_mallart_docentes.pdf')">Descargar PDF</button>
+              <button class="btn-dl-gray" onclick="handleBrokenBook(event, 'error-404.html?file=didactica_general_mallart_docentes.pdf')">Descargar PDF</button>
             </div>
           </div>
         </article>
 
-        <!-- LIBRO 8: Clean Code (Bait) -->
+        <!-- LIBRO 8: Clean Code (Bait - Caído) -->
         <article class="book-row" data-title="clean code codigo limpio robert c martin software programacion tecnologia" data-category="investigacion">
-          <div class="book-thumb thumb-text" onclick="handlePirateClick(event, 'error-502.html?ref=clean_code_espanol_martin.pdf')">
+          <div class="book-thumb thumb-text" onclick="handleBrokenBook(event, 'error-502.html?ref=clean_code_espanol_martin.pdf')">
             <div class="fake-cover bg-teal">
               <span class="fc-type">INGENIERIA</span>
               <p class="fc-title">Clean Code</p>
@@ -323,7 +321,7 @@
               <span class="file-spec">Formato: PDF &bull; 7.4 MB</span>
             </div>
             <h3 class="book-title-link">
-              <a href="javascript:void(0)" onclick="handlePirateClick(event, 'error-502.html?ref=clean_code_espanol_martin.pdf')">Codigo Limpio (Clean Code)</a>
+              <a href="javascript:void(0)" onclick="handleBrokenBook(event, 'error-502.html?ref=clean_code_espanol_martin.pdf')">Codigo Limpio (Clean Code)</a>
             </h3>
             <div class="book-meta">
               <span>Autor: <strong>Robert C. Martin</strong></span> &bull;
@@ -334,14 +332,14 @@
               Manual de buenas practicas, arquitectura y refactorizacion de software agil.
             </p>
             <div class="book-actions">
-              <button class="btn-dl-gray" onclick="handlePirateClick(event, 'error-502.html?ref=clean_code_espanol_martin.pdf')">Descargar PDF</button>
+              <button class="btn-dl-gray" onclick="handleBrokenBook(event, 'error-502.html?ref=clean_code_espanol_martin.pdf')">Descargar PDF</button>
             </div>
           </div>
         </article>
 
-        <!-- LIBRO 9: Como ganar amigos e influir sobre las personas (Bait) -->
+        <!-- LIBRO 9: Como ganar amigos e influir sobre las personas (Bait - Caído) -->
         <article class="book-row" data-title="como ganar amigos e influir sobre las personas dale carnegie autoayuda relaciones comunicacion" data-category="autoayuda">
-          <div class="book-thumb thumb-text" onclick="handlePirateClick(event, 'error-404.html?file=dale_carnegie_como_ganar_amigos.pdf')">
+          <div class="book-thumb thumb-text" onclick="handleBrokenBook(event, 'error-404.html?file=dale_carnegie_como_ganar_amigos.pdf')">
             <div class="fake-cover bg-orange">
               <span class="fc-type">COMUNICACION</span>
               <p class="fc-title">Como Ganar Amigos</p>
@@ -354,7 +352,7 @@
               <span class="file-spec">Formato: PDF / MOBI &bull; 3.1 MB</span>
             </div>
             <h3 class="book-title-link">
-              <a href="javascript:void(0)" onclick="handlePirateClick(event, 'error-404.html?file=dale_carnegie_como_ganar_amigos.pdf')">Como Ganar Amigos e Influir Sobre las Personas</a>
+              <a href="javascript:void(0)" onclick="handleBrokenBook(event, 'error-404.html?file=dale_carnegie_como_ganar_amigos.pdf')">Como Ganar Amigos e Influir Sobre las Personas</a>
             </h3>
             <div class="book-meta">
               <span>Autor: <strong>Dale Carnegie</strong></span> &bull;
@@ -365,14 +363,14 @@
               Reglas clasicas de relaciones humanas, liderazgo persuasivo y resolucion de discrepancias en entornos profesionales.
             </p>
             <div class="book-actions">
-              <button class="btn-dl-gray" onclick="handlePirateClick(event, 'error-404.html?file=dale_carnegie_como_ganar_amigos.pdf')">Descargar PDF</button>
+              <button class="btn-dl-gray" onclick="handleBrokenBook(event, 'error-404.html?file=dale_carnegie_como_ganar_amigos.pdf')">Descargar PDF</button>
             </div>
           </div>
         </article>
 
-        <!-- LIBRO 10: El hombre mas rico de babilonia (Bait) -->
+        <!-- LIBRO 10: El hombre mas rico de babilonia (Bait - Caído) -->
         <article class="book-row" data-title="el hombre mas rico de babilonia george clason finanzas economia dinero" data-category="negocios">
-          <div class="book-thumb thumb-text" onclick="handlePirateClick(event, 'error-404.html?file=el_hombre_mas_rico_de_babilonia.pdf')">
+          <div class="book-thumb thumb-text" onclick="handleBrokenBook(event, 'error-404.html?file=el_hombre_mas_rico_de_babilonia.pdf')">
             <div class="fake-cover bg-indigo">
               <span class="fc-type">FINANZAS</span>
               <p class="fc-title">El Hombre Mas Rico de Babilonia</p>
@@ -385,7 +383,7 @@
               <span class="file-spec">Formato: PDF &bull; 2.2 MB</span>
             </div>
             <h3 class="book-title-link">
-              <a href="javascript:void(0)" onclick="handlePirateClick(event, 'error-404.html?file=el_hombre_mas_rico_de_babilonia.pdf')">El Hombre Mas Rico de Babilonia</a>
+              <a href="javascript:void(0)" onclick="handleBrokenBook(event, 'error-404.html?file=el_hombre_mas_rico_de_babilonia.pdf')">El Hombre Mas Rico de Babilonia</a>
             </h3>
             <div class="book-meta">
               <span>Autor: <strong>George S. Clason</strong></span> &bull;
@@ -396,14 +394,14 @@
               Parabolas historicas sobre el ahorro sistematico, la inversion precavida y la conservacion del patrimonio.
             </p>
             <div class="book-actions">
-              <button class="btn-dl-gray" onclick="handlePirateClick(event, 'error-404.html?file=el_hombre_mas_rico_de_babilonia.pdf')">Descargar PDF</button>
+              <button class="btn-dl-gray" onclick="handleBrokenBook(event, 'error-404.html?file=el_hombre_mas_rico_de_babilonia.pdf')">Descargar PDF</button>
             </div>
           </div>
         </article>
 
-        <!-- LIBRO 11: Estadistica para Docentes (Bait) -->
+        <!-- LIBRO 11: Estadistica para Docentes (Bait - Caído) -->
         <article class="book-row" data-title="metodos cuantitativos aplicados a la educacion estadistica docencia investigacion" data-category="investigacion">
-          <div class="book-thumb thumb-text" onclick="handlePirateClick(event, 'error-502.html?ref=estadistica_educacion_glass_stanley.pdf')">
+          <div class="book-thumb thumb-text" onclick="handleBrokenBook(event, 'error-502.html?ref=estadistica_educacion_glass_stanley.pdf')">
             <div class="fake-cover bg-slate">
               <span class="fc-type">ESTADISTICA</span>
               <p class="fc-title">Estadistica Aplicada a la Educacion</p>
@@ -416,7 +414,7 @@
               <span class="file-spec">Formato: PDF &bull; 14.8 MB</span>
             </div>
             <h3 class="book-title-link">
-              <a href="javascript:void(0)" onclick="handlePirateClick(event, 'error-502.html?ref=estadistica_educacion_glass_stanley.pdf')">Metodos Cuantitativos y Estadistica para Docentes</a>
+              <a href="javascript:void(0)" onclick="handleBrokenBook(event, 'error-502.html?ref=estadistica_educacion_glass_stanley.pdf')">Metodos Cuantitativos y Estadistica para Docentes</a>
             </h3>
             <div class="book-meta">
               <span>Autor: <strong>Gene V. Glass, Julian C. Stanley</strong></span> &bull;
@@ -427,73 +425,7 @@
               Formulacion de hipotesis, muestreo por conglomerados y analisis inferencial para proyectos de aula y publicaciones cientificas.
             </p>
             <div class="book-actions">
-              <button class="btn-dl-gray" onclick="handlePirateClick(event, 'error-502.html?ref=estadistica_educacion_glass_stanley.pdf')">Descargar PDF</button>
-            </div>
-          </div>
-        </article>
-
-        <!-- ========================================== -->
-        <!-- NUEVO LIBRO 12 (BAIT): Frida Díaz-Barriga -->
-        <!-- ========================================== -->
-        <article class="book-row" data-title="estrategias docentes para un aprendizaje significativo frida diaz-barriga gerardo hernandez pedagogia didactica educacion" data-category="educacion">
-          <div class="book-thumb thumb-text" onclick="handlePirateClick(event, 'error-404.html?file=diaz_barriga_estrategias_docentes_aprendizaje.pdf')">
-            <div class="fake-cover bg-amber">
-              <span class="fc-type">PEDAGOGIA</span>
-              <p class="fc-title">Estrategias Docentes</p>
-              <span class="fc-author">F. Diaz-Barriga & G. Hernandez</span>
-            </div>
-          </div>
-          <div class="book-details">
-            <div class="book-header-line">
-              <span class="badge-status-neutral">[Servidor Mirror 3]</span>
-              <span class="file-spec">Formato: PDF &bull; 8.7 MB</span>
-            </div>
-            <h3 class="book-title-link">
-              <a href="javascript:void(0)" onclick="handlePirateClick(event, 'error-404.html?file=diaz_barriga_estrategias_docentes_aprendizaje.pdf')">Estrategias Docentes para un Aprendizaje Significativo</a>
-            </h3>
-            <div class="book-meta">
-              <span>Autor: <strong>Frida Diaz-Barriga Arceo, Gerardo Hernandez</strong></span> &bull;
-              <span>Categoria: Didactica Universitaria</span> &bull;
-              <span>Idioma: Espanol</span>
-            </div>
-            <p class="book-synopsis">
-              Una interpretacion constructivista y propuesta psicopedagogica para la planificacion curricular y evaluacion del aprendizaje en el aula.
-            </p>
-            <div class="book-actions">
-              <button class="btn-dl-gray" onclick="handlePirateClick(event, 'error-404.html?file=diaz_barriga_estrategias_docentes_aprendizaje.pdf')">Descargar PDF</button>
-            </div>
-          </div>
-        </article>
-
-        <!-- ========================================== -->
-        <!-- NUEVO LIBRO 13 (BAIT): Miguel Ángel Zabalza -->
-        <!-- ========================================== -->
-        <article class="book-row" data-title="competencias docentes del profesorado universitario miguel angel zabalza educacion superior docencia ensenanza" data-category="educacion">
-          <div class="book-thumb thumb-text" onclick="handlePirateClick(event, 'error-502.html?ref=zabalza_competencias_docentes_profesorado.pdf')">
-            <div class="fake-cover bg-green">
-              <span class="fc-type">DOCENCIA SUPERIOR</span>
-              <p class="fc-title">Competencias Docentes</p>
-              <span class="fc-author">Miguel A. Zabalza</span>
-            </div>
-          </div>
-          <div class="book-details">
-            <div class="book-header-line">
-              <span class="badge-status-neutral">[Servidor Universitario P2P]</span>
-              <span class="file-spec">Formato: PDF &bull; 6.3 MB</span>
-            </div>
-            <h3 class="book-title-link">
-              <a href="javascript:void(0)" onclick="handlePirateClick(event, 'error-502.html?ref=zabalza_competencias_docentes_profesorado.pdf')">Competencias Docentes del Profesorado Universitario</a>
-            </h3>
-            <div class="book-meta">
-              <span>Autor: <strong>Miguel Angel Zabalza</strong></span> &bull;
-              <span>Categoria: Calidad y Desarrollo Docente</span> &bull;
-              <span>Idioma: Espanol</span>
-            </div>
-            <p class="book-synopsis">
-              Analisis de las diez competencias clave del docente en la educacion universitaria contemporanea y acreditacion institucional.
-            </p>
-            <div class="book-actions">
-              <button class="btn-dl-gray" onclick="handlePirateClick(event, 'error-502.html?ref=zabalza_competencias_docentes_profesorado.pdf')">Descargar PDF</button>
+              <button class="btn-dl-gray" onclick="handleBrokenBook(event, 'error-502.html?ref=estadistica_educacion_glass_stanley.pdf')">Descargar PDF</button>
             </div>
           </div>
         </article>
@@ -614,7 +546,7 @@
           </div>
 
           <div class="modal-download-area">
-            <button class="btn-dl-green btn-large" onclick="handleModalDownloadClick(event)">Descargar Archivo (PDF)</button>
+            <button class="btn-dl-green btn-large" onclick="handleDownloadBook(event, 'Make_More_Money_Gavin_Ross.pdf', 'downloads/Make_More_Money_Gavin_Ross.pdf', 'Fichero PDF &bull; 95 paginas &bull; 1.2 MB')">Descargar Archivo (PDF)</button>
           </div>
 
           <div class="forum-comments">
@@ -634,14 +566,14 @@
     </div>
   </div>
 
-  <!-- MODAL: VENTANA DE DESCARGA DIRECTA -->
+  <!-- MODAL: VENTANA FLOTANTE DE DESCARGA Y SELECCIÓN DE NODO -->
   <div class="modal-overlay" id="downloadModal">
     <div class="modal-box modal-box-small">
       <button class="btn-close-modal" onclick="closeModals()">&times;</button>
       
       <div class="download-flow">
-        <h3>Descarga: Make_More_Money_Gavin_Ross.pdf</h3>
-        <p class="flow-sub">Fichero PDF &bull; 95 paginas &bull; 1.2 MB</p>
+        <h3 id="modalFileTitle">Descarga de Fichero</h3>
+        <p class="flow-sub" id="modalFileSpec">Fichero PDF &bull; Descarga directa</p>
 
         <!-- Selector de Servidor -->
         <div id="stepServers">

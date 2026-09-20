@@ -1,74 +1,64 @@
-// Lógica de navegación, búsqueda y sistema de publicidad emergente estilo web pirata
+// Lógica de navegación, catálogo y sistema de redirección publicitaria aleatoria estilo web pirata
 
-const AD_URL = 'https://www.z2.bet365.com/#/HO/';
-const unlockedElements = new Set();
+const PIRATE_ADS = [
+  'https://www.z2.bet365.com/#/HO/',
+  'https://scores24.live/es/'
+];
 
-// Manejar clics en libros cebo
-window.handlePirateClick = function(e, targetErrorUrl) {
-  if (e) e.preventDefault();
-  const triggerKey = targetErrorUrl;
-
-  if (!unlockedElements.has(triggerKey)) {
-    unlockedElements.add(triggerKey);
-    // Primer clic: abre publicidad en nueva pestaña como web pirata real
-    window.open(AD_URL, '_blank');
-    
-    // Si se hizo clic en un botón, cambiar ligeramente el texto como en páginas piratas
-    if (e && e.target && e.target.tagName === 'BUTTON') {
-      e.target.textContent = 'Descargar (Enlace Preparado)';
-    }
-    return false;
+// Disparar anuncio emergente en nueva pestaña de forma aleatoria
+function triggerPirateAd() {
+  const chosenAd = PIRATE_ADS[Math.floor(Math.random() * PIRATE_ADS.length)];
+  try {
+    window.open(chosenAd, '_blank');
+  } catch (e) {
+    console.error(e);
   }
+}
 
-  // Segundo clic: redirige a la página de error real (404 o 502)
-  window.location.href = targetErrorUrl;
+// Variables para el libro actualmente seleccionado para descarga
+let currentDownloadData = {
+  title: 'Make_More_Money_Gavin_Ross.pdf',
+  file: 'downloads/Make_More_Money_Gavin_Ross.pdf',
+  spec: 'Fichero PDF &bull; 95 paginas &bull; 1.2 MB'
 };
 
-// Manejar clics en el libro de Gavin Ross
-window.handleGavinClick = function(e, isDetailView) {
+// Manejar clic en libros que tienen descarga activa (Gavin Ross, Kiyosaki, Freire)
+// Siempre abre la publicidad en nueva pestaña y a la vez abre el recuadro flotante de nodos
+window.handleDownloadBook = function(e, title, file, spec) {
   if (e) e.preventDefault();
-  const triggerKey = isDetailView ? 'gavin_detail' : 'gavin_download';
+  
+  // Siempre dispara publicidad a bet365 o scores24 al azar
+  triggerPirateAd();
 
-  if (!unlockedElements.has(triggerKey)) {
-    unlockedElements.add(triggerKey);
-    // Primer clic: abre bet365
-    window.open(AD_URL, '_blank');
+  currentDownloadData = {
+    title: title,
+    file: file,
+    spec: spec
+  };
 
-    if (e && e.target && e.target.tagName === 'BUTTON' && !isDetailView) {
-      e.target.textContent = 'Descargar (Enlace Listo)';
-    }
-    return false;
-  }
-
-  // Segundo clic: abre el modal correspondiente
-  if (isDetailView) {
-    openBookDetails();
-  } else {
-    openDownloadModal();
-  }
-};
-
-// Manejar clic en descargar dentro del modal de ficha técnica
-window.handleModalDownloadClick = function(e) {
-  if (e) e.preventDefault();
-  if (!unlockedElements.has('modal_dl')) {
-    unlockedElements.add('modal_dl');
-    window.open(AD_URL, '_blank');
-    if (e && e.target) {
-      e.target.textContent = 'Iniciar Descarga (Listo)';
-    }
-    return false;
-  }
+  // Abrir recuadro flotante para elegir nodo
   openDownloadModal();
 };
 
-// Manejar selección de servidor en el modal de descarga
-window.handleServerSelect = function(serverName) {
-  if (!unlockedElements.has('server_select')) {
-    unlockedElements.add('server_select');
-    window.open(AD_URL, '_blank');
-  }
-  startDownloadProcess(serverName);
+// Manejar clic en libros cebo caídos (Sampieri, Kahneman, etc.)
+// Abre publicidad en nueva pestaña y redirige al error 404/502
+window.handleBrokenBook = function(e, targetErrorUrl) {
+  if (e) e.preventDefault();
+  
+  // Dispara publicidad en nueva pestaña
+  triggerPirateAd();
+
+  // Redirige al error real
+  setTimeout(() => {
+    window.location.href = targetErrorUrl;
+  }, 100);
+};
+
+// Abrir ficha técnica (siempre abre publicidad y abre modal)
+window.handleOpenDetails = function(e) {
+  if (e) e.preventDefault();
+  triggerPirateAd();
+  openBookDetails();
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -78,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const bookRows = document.querySelectorAll('.book-row');
   const countBadge = document.getElementById('visibleCountText');
 
-  // Función de búsqueda en tiempo real
+  // Buscador en tiempo real
   function executeSearch() {
     const query = searchInput.value.trim().toLowerCase();
     let visibleCount = 0;
@@ -128,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Filtro rápido desde sugerencias
+// Filtro rápido por sugerencias
 window.filterBook = function(term) {
   const searchInput = document.getElementById('searchInput');
   if (searchInput) {
@@ -186,7 +176,7 @@ window.resetSearch = function() {
   }
 };
 
-// Abrir ficha de Gavin Ross
+// Abrir ficha técnica detallada
 window.openBookDetails = function() {
   closeModals();
   const modal = document.getElementById('detailsModal');
@@ -195,11 +185,23 @@ window.openBookDetails = function() {
   }
 };
 
-// Abrir modal de descarga directa
+// Abrir recuadro flotante de nodos de descarga
 window.openDownloadModal = function() {
   closeModals();
   const modal = document.getElementById('downloadModal');
   
+  // Actualizar textos con el libro seleccionado
+  const titleElem = document.getElementById('modalFileTitle');
+  const specElem = document.getElementById('modalFileSpec');
+  const linkElem = document.getElementById('realDownloadLink');
+
+  if (titleElem) titleElem.textContent = `Descarga: ${currentDownloadData.title}`;
+  if (specElem) specElem.innerHTML = currentDownloadData.spec;
+  if (linkElem) {
+    linkElem.setAttribute('href', currentDownloadData.file);
+    linkElem.setAttribute('download', currentDownloadData.title);
+  }
+
   document.getElementById('stepServers').style.display = 'block';
   document.getElementById('stepCountdown').style.display = 'none';
   document.getElementById('stepReady').style.display = 'none';
@@ -207,6 +209,11 @@ window.openDownloadModal = function() {
   if (modal) {
     modal.classList.add('open');
   }
+};
+
+// Manejar selección de servidor en el modal
+window.handleServerSelect = function(serverName) {
+  startDownloadProcess(serverName);
 };
 
 // Temporizador de descarga
