@@ -12,7 +12,7 @@
   <!-- Barra de aviso de estado de servidores -->
   <div class="top-status-bar">
     <div class="container">
-      <span>Estado del servicio: Servidores CDN operativos. Espejos 2 y 4 en reparacion tecnica tras revisiones DMCA.</span>
+      <span>DHT Daemon: v4.18.2 | Nodos swarm activos: 1,842 | Tabla hash Kademlia: sincronizada | Buffer I/O: 128 MB</span>
     </div>
   </div>
 
@@ -82,7 +82,7 @@
       </div>
 
       <div class="notice-box">
-        <strong>Nota del Administrador:</strong> Debido a continuas migraciones en los clusters de almacenamiento, algunos servidores espejo pueden arrojar interrupciones de conexion o error 404/502. Por favor intente con los enlaces disponibles en la red.
+        <strong>Aviso del protocolo:</strong> Enlaces resueltos dinamicamente mediante hash magnet y asignacion de bloques fragmentados. Si experimenta fallo de paridad o corte de socket durante la cabecera chunked transfer-encoding, actualice la peticion o pruebe la descarga directa desde el pool CDN.
       </div>
 
       <!-- Lista de Libros -->
@@ -115,7 +115,7 @@
             </p>
             <div class="book-actions">
               <a href="error-404.html?file=sampieri_metodologia_investigacion_6ta_ed.pdf" class="btn-dl-gray">Descargar PDF</a>
-              <span class="note-dim">Servidor: storage-cluster-04</span>
+              <span class="note-dim">ERR_UPSTREAM_PEER_RST [LBA #29401]</span>
             </div>
           </div>
         </article>
@@ -147,7 +147,7 @@
             </p>
             <div class="book-actions">
               <a href="error-502.html?ref=freire_pedagogia_oprimido.pdf" class="btn-dl-gray">Descargar PDF</a>
-              <span class="note-dim">Servidor: host-cluster-02</span>
+              <span class="note-dim">RST_STREAM (ERR_HTTP2_PROTOCOL_ERROR)</span>
             </div>
           </div>
         </article>
@@ -179,7 +179,7 @@
             </p>
             <div class="book-actions">
               <a href="error-404.html?file=padre_rico_padre_pobre_kiyosaki.pdf" class="btn-dl-gray">Descargar PDF</a>
-              <span class="note-dim">Estado: Nodo caido</span>
+              <span class="note-dim">Desincronizacion paridad CRC-32 (Chunk mismatch)</span>
             </div>
           </div>
         </article>
@@ -198,7 +198,7 @@
           <div class="book-details">
             <div class="book-header-line">
               <span class="badge-status-neutral">[Servidor Mirror 1]</span>
-              <span class="file-spec">Formato: PDF &bull; 96 paginas &bull; 1.2 MB</span>
+              <span class="file-spec">Formato: PDF &bull; 95 paginas &bull; 1.2 MB</span>
             </div>
             <h3 class="book-title-link">
               <a href="javascript:void(0)" onclick="openBookDetails()">Make More Money: The System of Income Multiplication</a>
@@ -206,11 +206,11 @@
             <div class="book-meta">
               <span>Autor: <strong>Gavin Ross</strong></span> &bull;
               <span>Ano: 2024</span> &bull;
-              <span>Idioma: Ingles / Espanol</span> &bull;
-              <span>ISBN: 978-1-954820-41-9</span>
+              <span>Idioma: Espanol (Traduccion oficial)</span> &bull;
+              <span>ISBN: 978-84-95482-41-9</span>
             </div>
             <p class="book-synopsis">
-              The ultimate practical blueprint for scaling personal income, capital velocity, and financial autonomy. Monografia completa de 96 paginas.
+              El sistema definitivo para escalar ingresos personales, acelerar la velocidad del capital y consolidar la autonomia financiera. Monografia completa de 95 paginas.
             </p>
             <div class="book-actions">
               <button class="btn-dl-gray" onclick="openDownloadModal()">Descargar PDF</button>
@@ -246,7 +246,7 @@
             </p>
             <div class="book-actions">
               <a href="error-502.html?ref=habitos_atomicos_james_clear.epub" class="btn-dl-gray">Descargar EPUB</a>
-              <span class="note-dim">Estado: 502 Timeout</span>
+              <span class="note-dim">Socket TCP cerrado por host [ECONNRESET]</span>
             </div>
           </div>
         </article>
@@ -278,7 +278,7 @@
             </p>
             <div class="book-actions">
               <a href="error-404.html?file=kahneman_pensar_rapido_despacio.pdf" class="btn-dl-gray">Descargar PDF</a>
-              <span class="note-dim">Servidor: mirror-de-01</span>
+              <span class="note-dim">Segmento truncado (ERR_CONTENT_LENGTH)</span>
             </div>
           </div>
         </article>
@@ -310,7 +310,7 @@
             </p>
             <div class="book-actions">
               <a href="error-404.html?file=didactica_general_mallart_docentes.pdf" class="btn-dl-gray">Descargar PDF</a>
-              <span class="note-dim">Estado: Enlace caido</span>
+              <span class="note-dim">Timeout socket I/O (SYN_SENT 0 B/s)</span>
             </div>
           </div>
         </article>
@@ -342,7 +342,7 @@
             </p>
             <div class="book-actions">
               <a href="error-502.html?ref=clean_code_espanol_martin.pdf" class="btn-dl-gray">Descargar PDF</a>
-              <span class="note-dim">Estado: Nodo desconectado</span>
+              <span class="note-dim">Fallo asignacion memoria en storage pool</span>
             </div>
           </div>
         </article>
@@ -374,7 +374,7 @@
             </p>
             <div class="book-actions">
               <a href="error-404.html?file=dale_carnegie_como_ganar_amigos.pdf" class="btn-dl-gray">Descargar PDF</a>
-              <span class="note-dim">Estado: Fichero no encontrado</span>
+              <span class="note-dim">Descriptor i-nodo corrupto #91823</span>
             </div>
           </div>
         </article>
@@ -406,7 +406,7 @@
             </p>
             <div class="book-actions">
               <a href="error-404.html?file=el_hombre_mas_rico_de_babilonia.pdf" class="btn-dl-gray">Descargar PDF</a>
-              <span class="note-dim">Estado: Enlace roto</span>
+              <span class="note-dim">Fallo handshake TLS 1.3 (Cipher negotiation)</span>
             </div>
           </div>
         </article>
@@ -438,7 +438,7 @@
             </p>
             <div class="book-actions">
               <a href="error-502.html?ref=estadistica_educacion_glass_stanley.pdf" class="btn-dl-gray">Descargar PDF</a>
-              <span class="note-dim">Estado: Nodo sin respuesta</span>
+              <span class="note-dim">Conexion abortada por balanceador NGINX</span>
             </div>
           </div>
         </article>
@@ -468,7 +468,7 @@
       <div class="widget-box">
         <h4 class="widget-title">Aviso de la Red</h4>
         <p style="font-size: 11px; color: #6c757d; line-height: 1.45;">
-          Los enlaces a documentos y tesis se actualizan de forma automatica cada 48 horas. Si un fichero no responde, intente nuevamente mas tarde o pruebe con otros titulos de la coleccion.
+          Los enlaces a documentos y tesis se actualizan de forma automatica cada 48 horas mediante indexadores distribuidos.
         </p>
       </div>
 
@@ -527,7 +527,7 @@
             </tr>
             <tr>
               <td>Idioma:</td>
-              <td>Ingles / Espanol (Edicion Integra)</td>
+              <td>Espanol (Traduccion oficial)</td>
             </tr>
             <tr>
               <td>Formato:</td>
@@ -539,7 +539,7 @@
             </tr>
             <tr>
               <td>Numero de paginas:</td>
-              <td>96 paginas</td>
+              <td>95 paginas</td>
             </tr>
             <tr>
               <td>Editorial:</td>
@@ -547,7 +547,7 @@
             </tr>
             <tr>
               <td>ISBN:</td>
-              <td>978-1-954820-41-9</td>
+              <td>978-84-95482-41-9</td>
             </tr>
           </table>
 
@@ -566,11 +566,11 @@
             <h4>Comentarios de usuarios (2):</h4>
             <div class="comment-entry">
               <span class="comment-user">usuario_net:</span>
-              <p>Funciono perfecto el enlace del servidor 1, los 96 folios vienen en buena calidad de texto.</p>
+              <p>Funciono el mirror 1, los 95 folios descargaron completos en PDF.</p>
             </div>
             <div class="comment-entry">
               <span class="comment-user">docente_inv:</span>
-              <p>Bajo sin problemas en formato PDF.</p>
+              <p>Bajo sin problemas el archivo.</p>
             </div>
           </div>
 
@@ -586,7 +586,7 @@
       
       <div class="download-flow">
         <h3>Descarga: Make_More_Money_Gavin_Ross.pdf</h3>
-        <p class="flow-sub">Fichero PDF &bull; 96 paginas &bull; 1.2 MB</p>
+        <p class="flow-sub">Fichero PDF &bull; 95 paginas &bull; 1.2 MB</p>
 
         <!-- Selector de Servidor -->
         <div id="stepServers">
