@@ -1,25 +1,30 @@
-// Lógica de interacción para LectuVault
+// Lógica de navegación e interacción de LectuLibros.org
+
 document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('searchInput');
   const searchBtn = document.getElementById('searchBtn');
-  const booksGrid = document.getElementById('booksGrid');
   const noResults = document.getElementById('noResults');
-  const bookCards = document.querySelectorAll('.book-card');
+  const bookRows = document.querySelectorAll('.book-row');
+  const countBadge = document.getElementById('visibleCountText');
 
-  // Buscador en tiempo real
+  // Función de búsqueda
   function executeSearch() {
     const query = searchInput.value.trim().toLowerCase();
     let visibleCount = 0;
 
-    bookCards.forEach(card => {
-      const title = card.getAttribute('data-title') || '';
-      if (query === '' || title.includes(query)) {
-        card.style.display = 'flex';
+    bookRows.forEach(row => {
+      const dataTitle = (row.getAttribute('data-title') || '').toLowerCase();
+      if (query === '' || dataTitle.includes(query)) {
+        row.style.display = 'flex';
         visibleCount++;
       } else {
-        card.style.display = 'none';
+        row.style.display = 'none';
       }
     });
+
+    if (countBadge) {
+      countBadge.textContent = `${visibleCount} libro${visibleCount === 1 ? '' : 's'} en lista`;
+    }
 
     if (visibleCount === 0) {
       noResults.style.display = 'block';
@@ -28,71 +33,89 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  searchInput.addEventListener('input', executeSearch);
-  searchBtn.addEventListener('click', executeSearch);
+  if (searchInput) {
+    searchInput.addEventListener('input', executeSearch);
+  }
+  if (searchBtn) {
+    searchBtn.addEventListener('click', executeSearch);
+  }
 
-  // Cerrar modales con tecla ESC
+  // Cerrar modales con tecla Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       closeModals();
     }
   });
 
-  // Cerrar al hacer clic en el fondo oscuro
-  document.querySelectorAll('.modal-backdrop').forEach(modal => {
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
+  // Cerrar modal al hacer clic en el fondo gris
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
         closeModals();
       }
     });
   });
 });
 
-// Filtro rápido por texto desde los tags
+// Filtro rápido desde los enlaces de sugerencias
 window.filterBook = function(term) {
   const searchInput = document.getElementById('searchInput');
-  searchInput.value = term;
-  searchInput.dispatchEvent(new Event('input'));
-  
-  const dest = document.getElementById('destacados');
-  if (dest) {
-    dest.scrollIntoView({ behavior: 'smooth' });
+  if (searchInput) {
+    searchInput.value = term;
+    searchInput.dispatchEvent(new Event('input'));
+  }
+  const catalogo = document.getElementById('catalogo');
+  if (catalogo) {
+    catalogo.scrollIntoView({ behavior: 'smooth' });
   }
 };
 
 // Filtro por categorías
 window.filterCategory = function(cat) {
-  // Actualizar botones de píldora
-  document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
-  event.target.classList.add('active');
+  const searchInput = document.getElementById('searchInput');
+  if (searchInput) searchInput.value = '';
 
-  const bookCards = document.querySelectorAll('.book-card');
+  const bookRows = document.querySelectorAll('.book-row');
   const noResults = document.getElementById('noResults');
+  const countBadge = document.getElementById('visibleCountText');
   let visibleCount = 0;
 
-  bookCards.forEach(card => {
-    const cardCat = card.getAttribute('data-category');
-    if (cat === 'todos' || cardCat === cat) {
-      card.style.display = 'flex';
+  bookRows.forEach(row => {
+    const rowCat = row.getAttribute('data-category');
+    if (cat === 'todos' || rowCat === cat) {
+      row.style.display = 'flex';
       visibleCount++;
     } else {
-      card.style.display = 'none';
+      row.style.display = 'none';
     }
   });
 
-  noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+  if (countBadge) {
+    countBadge.textContent = `${visibleCount} libro${visibleCount === 1 ? '' : 's'} en lista`;
+  }
+
+  if (visibleCount === 0) {
+    noResults.style.display = 'block';
+  } else {
+    noResults.style.display = 'none';
+  }
+
+  const catalogo = document.getElementById('catalogo');
+  if (catalogo) {
+    catalogo.scrollIntoView({ behavior: 'smooth' });
+  }
 };
 
-// Resetear búsqueda
+// Restablecer catálogo completo
 window.resetSearch = function() {
   const searchInput = document.getElementById('searchInput');
-  searchInput.value = '';
-  searchInput.dispatchEvent(new Event('input'));
-  document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
-  document.querySelector('.pill').classList.add('active');
+  if (searchInput) {
+    searchInput.value = '';
+    searchInput.dispatchEvent(new Event('input'));
+  }
 };
 
-// Abrir ficha técnica detallada de Make More Money
+// Abrir ficha detallada del libro de Gavin Ross
 window.openBookDetails = function() {
   closeModals();
   const modal = document.getElementById('detailsModal');
@@ -101,119 +124,78 @@ window.openBookDetails = function() {
   }
 };
 
-// Abrir modal de descarga de servidores
+// Abrir modal de descarga y selección de servidor
 window.openDownloadModal = function() {
   closeModals();
   const modal = document.getElementById('downloadModal');
   
-  // Restablecer vistas internas del modal
-  document.getElementById('serverSelectorView').style.display = 'block';
-  document.getElementById('countdownView').style.display = 'none';
-  document.getElementById('readyView').style.display = 'none';
-  
+  // Reestablecer vistas internas
+  document.getElementById('stepServers').style.display = 'block';
+  document.getElementById('stepCountdown').style.display = 'none';
+  document.getElementById('stepReady').style.display = 'none';
+
   if (modal) {
     modal.classList.add('open');
   }
 };
 
-// Iniciar proceso de cuenta regresiva de descarga
-let countdownInterval = null;
+// Iniciar temporizador de descarga
+let dlTimer = null;
 window.startDownloadProcess = function(serverName) {
-  document.getElementById('serverSelectorView').style.display = 'none';
-  const countdownView = document.getElementById('countdownView');
-  countdownView.style.display = 'block';
+  document.getElementById('stepServers').style.display = 'none';
+  const stepCountdown = document.getElementById('stepCountdown');
+  stepCountdown.style.display = 'block';
 
-  let timeLeft = 4;
+  let seconds = 3;
   const numElem = document.getElementById('countdownNumber');
-  const statusElem = document.getElementById('countdownStatus');
-  const progressFill = document.getElementById('progressBarFill');
+  const msgElem = document.getElementById('countdownMessage');
+  const barElem = document.getElementById('barFill');
 
-  numElem.textContent = timeLeft;
-  progressFill.style.width = '20%';
+  numElem.textContent = seconds;
+  barElem.style.width = '25%';
 
-  if (countdownInterval) clearInterval(countdownInterval);
+  if (dlTimer) clearInterval(dlTimer);
 
-  countdownInterval = setInterval(() => {
-    timeLeft--;
-    numElem.textContent = timeLeft;
-    
-    if (timeLeft === 3) {
-      statusElem.textContent = `Conectando con ${serverName}...`;
-      progressFill.style.width = '50%';
-    } else if (timeLeft === 2) {
-      statusElem.textContent = 'Validando bloque de descifrado y hash MD5...';
-      progressFill.style.width = '75%';
-    } else if (timeLeft === 1) {
-      statusElem.textContent = 'Enlace seguro generado sin publicidad.';
-      progressFill.style.width = '95%';
-    } else if (timeLeft <= 0) {
-      clearInterval(countdownInterval);
-      progressFill.style.width = '100%';
-      showReadyDownload();
+  dlTimer = setInterval(() => {
+    seconds--;
+    numElem.textContent = seconds;
+
+    if (seconds === 2) {
+      msgElem.textContent = `Conectando con ${serverName}...`;
+      barElem.style.width = '60%';
+    } else if (seconds === 1) {
+      msgElem.textContent = 'Generando cabecera de transferencia binaria...';
+      barElem.style.width = '90%';
+    } else if (seconds <= 0) {
+      clearInterval(dlTimer);
+      barElem.style.width = '100%';
+      triggerFinishDownload();
     }
-  }, 950);
+  }, 900);
 };
 
-// Mostrar pantalla de enlace listo y disparar descarga automática
-function showReadyDownload() {
-  document.getElementById('countdownView').style.display = 'none';
-  document.getElementById('readyView').style.display = 'block';
+// Finalizar y disparar la descarga directa al navegador
+function triggerFinishDownload() {
+  document.getElementById('stepCountdown').style.display = 'none';
+  document.getElementById('stepReady').style.display = 'block';
 
-  // Simulación de disparo de descarga automática
   setTimeout(() => {
-    const downloadLink = document.getElementById('directDownloadBtn');
-    if (downloadLink) {
-      // Disparar clic para descargar el archivo
-      const clickEvent = new MouseEvent('click', {
+    const link = document.getElementById('realDownloadLink');
+    if (link) {
+      const evt = new MouseEvent('click', {
         view: window,
         bubbles: true,
         cancelable: true
       });
-      downloadLink.dispatchEvent(clickEvent);
+      link.dispatchEvent(evt);
     }
-  }, 800);
+  }, 600);
 }
-
-// Abrir modal de DMCA creíble para libros cebo
-window.openDmcaModal = function(bookTitle) {
-  closeModals();
-  const modal = document.getElementById('dmcaModal');
-  const titleElem = document.getElementById('dmcaTitle');
-  const msgElem = document.getElementById('dmcaMessage');
-
-  titleElem.textContent = `Enlace No Disponible: ${bookTitle}`;
-  msgElem.innerHTML = `El servidor donde se alojaba <strong>"${bookTitle}"</strong> ha sido desactivado temporalmente debido a una reclamación DMCA automática o saturación de ancho de banda.`;
-
-  if (modal) {
-    modal.classList.add('open');
-  }
-};
-
-// Aviso DMCA general
-window.openDmcaNotice = function() {
-  closeModals();
-  const modal = document.getElementById('dmcaModal');
-  const titleElem = document.getElementById('dmcaTitle');
-  const msgElem = document.getElementById('dmcaMessage');
-
-  titleElem.textContent = 'Política de Propiedad Intelectual & DMCA';
-  msgElem.innerHTML = 'LectuVault respeta los derechos de autor conforme a la ley 17 U.S.C. § 512. Ningún archivo con copyright es alojado por nuestros servidores centrales; los nodos P2P se sincronizan de forma descentralizada. Para solicitar la retirada de un enlace, contacte a dmca@lectuvault.org.';
-
-  if (modal) {
-    modal.classList.add('open');
-  }
-};
 
 // Cerrar todos los modales
 window.closeModals = function() {
-  if (countdownInterval) clearInterval(countdownInterval);
-  document.querySelectorAll('.modal-backdrop').forEach(modal => {
+  if (dlTimer) clearInterval(dlTimer);
+  document.querySelectorAll('.modal-overlay').forEach(modal => {
     modal.classList.remove('open');
   });
-};
-
-// Ir al libro destacado de Gavin Ross desde un aviso de error
-window.goToFeatured = function() {
-  closeModals();
-  openBookDetails();
 };
