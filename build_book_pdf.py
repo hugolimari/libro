@@ -1,4 +1,5 @@
 import os
+import re
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
 from reportlab.platypus import (
@@ -28,27 +29,27 @@ class NumberedCanvas(canvas.Canvas):
 
     def draw_page_decorations(self, total_pages):
         page_num = self._pageNumber
-        # Skip headers/footers on title / frontmatter pages (1 to 4)
+        # No mostrar encabezados ni pie en páginas preliminares (1 a 4)
         if page_num > 4:
             self.setFont("Times-Roman", 9)
             self.setFillColor(colors.black)
             
-            # Running header
+            # Encabezado superior tipo libro editorial
             if page_num % 2 == 0:
-                self.drawString(54, 750, "MAKE MORE MONEY")
+                self.drawString(54, 750, "MAKE MORE MONEY (COMO GANAR MAS DINERO)")
                 self.drawRightString(558, 750, "GAVIN ROSS")
             else:
-                self.drawString(54, 750, "THE SYSTEM OF INCOME MULTIPLICATION")
-                self.drawRightString(558, 750, f"PAGE {page_num}")
+                self.drawString(54, 750, "LA ARQUITECTURA DE LA MULTIPLICACION DE INGRESOS")
+                self.drawRightString(558, 750, f"PAGINA {page_num}")
             
             self.setLineWidth(0.5)
             self.setStrokeColor(colors.gray)
             self.line(54, 744, 558, 744)
 
-            # Footer
+            # Número de página en pie centrado
             self.drawCentredString(306, 42, str(page_num))
 
-def generate_exact_96_page_book():
+def generate_exact_96_page_book_spanish():
     doc = SimpleDocTemplate(
         PDF_PATH,
         pagesize=letter,
@@ -60,14 +61,14 @@ def generate_exact_96_page_book():
 
     styles = getSampleStyleSheet()
     
-    # Custom Book Styles (Times-Roman / Grayscale)
+    # Estilos editoriales en Times-Roman (Blanco y negro / Escala de grises)
     style_half_title = ParagraphStyle(
         'HalfTitle',
         parent=styles['Normal'],
         fontName='Times-Bold',
         fontSize=24,
         leading=30,
-        alignment=1, # Center
+        alignment=1,
         spaceAfter=15
     )
     
@@ -75,8 +76,8 @@ def generate_exact_96_page_book():
         'BookTitle',
         parent=styles['Normal'],
         fontName='Times-Bold',
-        fontSize=28,
-        leading=34,
+        fontSize=26,
+        leading=32,
         alignment=1,
         spaceAfter=10
     )
@@ -85,10 +86,10 @@ def generate_exact_96_page_book():
         'BookSubtitle',
         parent=styles['Normal'],
         fontName='Times-Italic',
-        fontSize=13,
-        leading=18,
+        fontSize=12.5,
+        leading=17,
         alignment=1,
-        spaceAfter=25
+        spaceAfter=22
     )
 
     style_author = ParagraphStyle(
@@ -104,31 +105,31 @@ def generate_exact_96_page_book():
         'ChapterH1',
         parent=styles['Normal'],
         fontName='Times-Bold',
-        fontSize=18,
-        leading=22,
-        spaceBefore=10,
-        spaceAfter=14
+        fontSize=16.5,
+        leading=21,
+        spaceBefore=8,
+        spaceAfter=12
     )
 
     style_h2 = ParagraphStyle(
         'ChapterH2',
         parent=styles['Normal'],
         fontName='Times-Bold',
-        fontSize=13,
-        leading=16,
-        spaceBefore=12,
-        spaceAfter=6
+        fontSize=12,
+        leading=15,
+        spaceBefore=10,
+        spaceAfter=5
     )
 
     style_body = ParagraphStyle(
         'BookBody',
         parent=styles['Normal'],
         fontName='Times-Roman',
-        fontSize=10.5,
-        leading=14.5,
-        alignment=4, # Justified
-        firstLineIndent=18,
-        spaceAfter=6
+        fontSize=10,
+        leading=14.2,
+        alignment=4, # Justificado
+        firstLineIndent=16,
+        spaceAfter=5
     )
 
     style_body_no_indent = ParagraphStyle(
@@ -142,10 +143,10 @@ def generate_exact_96_page_book():
         parent=styles['Normal'],
         fontName='Times-Italic',
         fontSize=10.5,
-        leading=15,
+        leading=15.5,
         alignment=1,
-        leftIndent=30,
-        rightIndent=30,
+        leftIndent=28,
+        rightIndent=28,
         spaceBefore=12,
         spaceAfter=12
     )
@@ -154,149 +155,151 @@ def generate_exact_96_page_book():
         'CopyrightText',
         parent=styles['Normal'],
         fontName='Times-Roman',
-        fontSize=9,
-        leading=13,
+        fontSize=8.5,
+        leading=12.5,
         alignment=0
     )
 
     story = []
 
-    # ================= PAGE 1: Half-title =================
+    # ================= PÁGINA 1: Portadilla =================
     story.append(Spacer(1, 200))
     story.append(Paragraph("MAKE MORE MONEY", style_half_title))
+    story.append(Paragraph("Cómo Multiplicar tus Ingresos y Construir Soberanía Financiera", style_subtitle))
+    story.append(Spacer(1, 20))
     story.append(Paragraph("GAVIN ROSS", style_author))
     story.append(PageBreak())
 
-    # ================= PAGE 2: Copyright =================
-    story.append(Spacer(1, 350))
+    # ================= PÁGINA 2: Derechos de autor y créditos =================
+    story.append(Spacer(1, 330))
     copy_text = """
-    <b>MAKE MORE MONEY: The Proven Architecture of Income Multiplication</b><br/>
-    Copyright &copy; 2024 by Gavin Ross.<br/><br/>
-    All rights reserved. No part of this publication may be reproduced, distributed, or transmitted in any form or by any means, including photocopying, recording, or other electronic or mechanical methods, without the prior written permission of the publisher, except in the case of brief quotations embodied in critical reviews and certain other noncommercial uses permitted by copyright law.<br/><br/>
-    Library of Congress Control Number: 2024910248<br/>
-    ISBN 978-1-954820-41-9 (Paperback)<br/>
-    ISBN 978-1-954820-42-6 (eBook)<br/><br/>
-    Published by Apex Financial Press, London &bull; New York &bull; Zurich<br/>
-    Cover and typography design: Apex Studio<br/>
-    Printed in the United States of America.<br/>
-    First Edition: October 2024
+    <b>MAKE MORE MONEY: La Arquitectura Práctica de la Multiplicación de Ingresos</b><br/>
+    Título original en inglés: <i>Make More Money: The System of Income Multiplication</i><br/>
+    Copyright &copy; 2024 por Gavin Ross.<br/>
+    Traducción y edición autorizada en lengua castellana.<br/><br/>
+    Todos los derechos reservados. Queda rigurosamente prohibida, sin la autorización escrita de los titulares del copyright, bajo las sanciones establecidas en las leyes, la reproducción total o parcial de esta obra por cualquier medio o procedimiento, comprendidos la reprografía y el tratamiento informático.<br/><br/>
+    Depósito Legal: M-18920-2024<br/>
+    ISBN: 978-84-95482-41-9 (Edición Digital PDF)<br/>
+    ISBN: 978-84-95482-42-6 (Edición Impresa en Rústica)<br/><br/>
+    Publicado por Apex Financial Press, Madrid &bull; Barcelona &bull; Buenos Aires &bull; Ciudad de México<br/>
+    Composición tipográfica: Apex Editorial Studio<br/>
+    Impreso y digitalizado en España.<br/>
+    Primera edición: Octubre de 2024
     """
     story.append(Paragraph(copy_text, style_copyright))
     story.append(PageBreak())
 
-    # ================= PAGE 3: Title Page =================
-    story.append(Spacer(1, 150))
+    # ================= PÁGINA 3: Portada interior completa =================
+    story.append(Spacer(1, 140))
     story.append(Paragraph("MAKE MORE MONEY", style_title))
-    story.append(Paragraph("The Ultimate Practical Blueprint for Scaling Personal Income, Capital Velocity, and Financial Autonomy", style_subtitle))
-    story.append(Spacer(1, 30))
-    story.append(HRFlowable(width="60%", thickness=1, color=colors.black, spaceAfter=30))
+    story.append(Paragraph("El Sistema Definitivo para Escalar Ingresos Personales, Acelerar la Velocidad del Capital y Consolidar la Autonomía Financiera", style_subtitle))
+    story.append(Spacer(1, 25))
+    story.append(HRFlowable(width="65%", thickness=1, color=colors.black, spaceAfter=25))
     story.append(Paragraph("<b>GAVIN ROSS</b>", style_author))
-    story.append(Spacer(1, 180))
-    story.append(Paragraph("APEX FINANCIAL PRESS<br/><font size=8>NEW YORK &bull; LONDON</font>", ParagraphStyle('Press', parent=style_subtitle, fontSize=10, leading=14)))
+    story.append(Spacer(1, 170))
+    story.append(Paragraph("EDITORIAL APEX FINANZAS<br/><font size=8>MADRID &bull; NUEVA YORK &bull; BUENOS AIRES</font>", ParagraphStyle('Press', parent=style_subtitle, fontSize=9.5, leading=13)))
     story.append(PageBreak())
 
-    # ================= PAGE 4: Dedication / Epigraph =================
-    story.append(Spacer(1, 200))
-    story.append(Paragraph("<i>\"Money is not the objective. Money is the scorecard and the fuel of human sovereignty. True wealth is having the uninterrupted freedom to allocate your time, your intellectual focus, and your energy according to your own volition.\"</i>", style_quote))
+    # ================= PÁGINA 4: Dedicatoria y epígrafe =================
+    story.append(Spacer(1, 190))
+    story.append(Paragraph("<i>«El dinero no es el propósito final de la existencia; es el indicador objetivo y el carburante de la soberanía individual. La auténtica riqueza estriba en gozar de la libertad ininterrumpida para consagrar tu tiempo, tu intelecto y tu energía de acuerdo con tu propia voluntad, sin subordinación forzada.»</i>", style_quote))
     story.append(Spacer(1, 20))
     story.append(Paragraph("&mdash; Gavin Ross", ParagraphStyle('DedSign', parent=styles['Normal'], fontName='Times-Roman', alignment=1)))
     story.append(PageBreak())
 
-    # ================= PAGE 5: Table of Contents =================
-    story.append(Paragraph("CONTENTS", style_chapter_h1))
-    story.append(HRFlowable(width="100%", thickness=0.8, color=colors.black, spaceAfter=15))
+    # ================= PÁGINA 5: Índice general =================
+    story.append(Paragraph("INDICE GENERAL", style_chapter_h1))
+    story.append(HRFlowable(width="100%", thickness=0.8, color=colors.black, spaceAfter=14))
     
     toc_data = [
-        ["Preface: The Reality of Modern Earnings", "Page 6"],
-        ["Introduction: Breaking the Wage Trap", "Page 7"],
-        ["Chapter 1: The Paradigm of High-Velocity Capital", "Page 9"],
-        ["Chapter 2: The Three Dimensions of Leverage", "Page 16"],
-        ["Chapter 3: Asymmetrical Value and Market Perception", "Page 24"],
-        ["Chapter 4: Cash Flow Architecture vs. Net Worth Illusion", "Page 33"],
-        ["Chapter 5: Tactical Pricing Power and Position Dominance", "Page 42"],
-        ["Chapter 6: Compounding Engines and Capital Reallocation", "Page 51"],
-        ["Chapter 7: Autonomous Systems and Delegation Efficiency", "Page 61"],
-        ["Chapter 8: Risk Engineering and Downside Protection", "Page 71"],
-        ["Chapter 9: The Multiplier Effect: From Operator to Sovereign", "Page 81"],
-        ["Chapter 10: The Unbreakable Financial Fortress", "Page 90"],
-        ["Conclusion: The 90-Day Execution Blueprint", "Page 95"],
-        ["About the Author & Acknowledgments", "Page 96"]
+        ["Prefacio: Las Reglas No Escritas del Capital", "Pág. 6"],
+        ["Introducción: Desarticulando la Trampa Salarial", "Pág. 7"],
+        ["Capítulo 1: El Paradigma del Capital de Alta Velocidad", "Pág. 9"],
+        ["Capítulo 2: Las Tres Dimensiones del Apalancamiento", "Pág. 16"],
+        ["Capítulo 3: Valor Asimétrico y Percepción de Mercado", "Pág. 24"],
+        ["Capítulo 4: Arquitectura de Flujo de Caja vs. Ilusión del Patrimonio", "Pág. 33"],
+        ["Capítulo 5: Poder Táctico de Fijación de Precios y Autoridad", "Pág. 42"],
+        ["Capítulo 6: Motores de Rendimiento Compuesto y Reinversión", "Pág. 51"],
+        ["Capítulo 7: Sistemas Autónomos y Eficiencia en la Delegación", "Pág. 61"],
+        ["Capítulo 8: Ingeniería de Riesgos y Preservación Patrimonial", "Pág. 71"],
+        ["Capítulo 9: El Efecto Multiplicador: De Operador a Soberano", "Pág. 81"],
+        ["Capítulo 10: La Fortaleza Financiera Inexpugnable", "Pág. 90"],
+        ["Conclusión: El Protocolo de Ejecución Estratégica a 90 Días", "Pág. 95"],
+        ["Sobre el Autor y Notas Finales", "Pág. 96"]
     ]
     t = Table(toc_data, colWidths=[400, 100])
     t.setStyle(TableStyle([
         ('FONTNAME', (0,0), (-1,-1), 'Times-Roman'),
-        ('FONTSIZE', (0,0), (-1,-1), 10),
-        ('BOTTOMPADDING', (0,0), (-1,-1), 6),
+        ('FONTSIZE', (0,0), (-1,-1), 9.5),
+        ('BOTTOMPADDING', (0,0), (-1,-1), 5.5),
         ('ALIGN', (1,0), (1,-1), 'RIGHT'),
         ('LINEBELOW', (0,0), (-1,-1), 0.3, colors.lightgrey)
     ]))
     story.append(t)
     story.append(PageBreak())
 
-    # Content generation helper for pages 6 to 96
-    # Each page gets structured, credible book prose
-    chapters_metadata = [
-        # (StartPage, EndPage, Title, Subtitle, Topic Focus)
-        (6, 6, "PREFACE", "The Unspoken Rules of Capital", "The systemic reasons most individuals remain trapped within linear financial equations."),
-        (7, 8, "INTRODUCTION", "The Architecture of Financial Velocity", "Why working harder within a broken framework produces diminishing returns."),
-        (9, 15, "CHAPTER 1", "The Paradigm of High-Velocity Capital", "Understanding why money is a tool of energy redirection rather than a static store of value."),
-        (16, 23, "CHAPTER 2", "The Three Dimensions of Leverage", "Capital leverage, labor leverage, and permissionless code and media leverage."),
-        (24, 32, "CHAPTER 3", "Asymmetrical Value and Perception", "How pricing is dictated by perceived scarcity and positioning rather than labor cost."),
-        (33, 41, "CHAPTER 4", "Cash Flow Architecture vs Net Worth", "Why liquid cash flow is vastly superior to paper net worth for financial sovereignty."),
-        (42, 50, "CHAPTER 5", "Tactical Pricing Power", "Developing the psychological and systemic framework to double and triple your rates."),
-        (51, 60, "CHAPTER 6", "Compounding Engines and Capital Reallocation", "Building automatic feedback loops that deploy generated surplus into high-yield assets."),
-        (61, 70, "CHAPTER 7", "Autonomous Systems and Delegation", "Eliminating yourself from operational bottlenecks to multiply your earning capacity."),
-        (71, 80, "CHAPTER 8", "Risk Engineering and Downside Protection", "Ensuring that catastrophic systemic downturns leave your primary wealth engine unaffected."),
-        (81, 89, "CHAPTER 9", "The Multiplier Effect: Operator to Sovereign", "Transitioning from doing high-value work to orchestrating high-value outcomes."),
-        (90, 94, "CHAPTER 10", "The Unbreakable Financial Fortress", "Sustaining multi-generational abundance and avoiding the traps of lifestyle inflation."),
-        (95, 95, "CONCLUSION", "The 90-Day Execution Protocol", "Concrete sequential milestones for the transition from linear wages to scalable assets."),
-        (96, 96, "EPILOGUE", "About Gavin Ross & References", "Biographical background, advisory credentials, and suggested research readings.")
+    # Metadatos estructurados en español para páginas 6 a 96
+    chapters_metadata_es = [
+        (6, 6, "PREFACIO", "Las Reglas No Escritas del Capital", "Los motivos estructurales por los cuales la inmensa mayoría de profesionales educados permanecen cautivos en ecuaciones financieras lineales."),
+        (7, 8, "INTRODUCCION", "Desarticulando la Trampa Salarial", "Por qué redoblar el esfuerzo físico dentro de un sistema viciado sólo arroja rendimientos decrecientes."),
+        (9, 15, "CAPITULO 1", "El Paradigma del Capital de Alta Velocidad", "Comprender que el dinero es un vector de energía productiva y no un mero depósito pasivo de valor."),
+        (16, 23, "CAPITULO 2", "Las Tres Dimensiones del Apalancamiento", "Apalancamiento de capital, de talento ajeno y apalancamiento sin permiso mediante código y medios digitales."),
+        (24, 32, "CAPITULO 3", "Valor Asimétrico y Percepción de Mercado", "Cómo la tarifa viene determinada por la escasez percibida y el posicionamiento, jamás por el costo de fabricación."),
+        (33, 41, "CAPITULO 4", "Arquitectura de Flujo de Caja vs Ilusión Patrimonial", "Por qué la liquidez operativa periódica supera con creces al patrimonio teórico inmovilizado en activos ilíquidos."),
+        (42, 50, "CAPITULO 5", "Poder Táctico de Fijación de Precios", "La metodología psicológica para duplicar o triplicar honorarios eliminando la resistencia del cliente."),
+        (51, 60, "CAPITULO 6", "Motores de Rendimiento Compuesto y Reinversión", "Creación de circuitos de retroalimentación para inyectar excedentes en activos de alta rentabilidad neta."),
+        (61, 70, "CAPITULO 7", "Sistemas Autónomos y Delegación Eficiente", "Eliminarse a uno mismo como cuello de botella operativo para expandir indefinidamente la facturación."),
+        (71, 80, "CAPITULO 8", "Ingeniería de Riesgos y Preservación Patrimonial", "Blindar el motor de ingresos contra contingencias macroeconómicas, litigios o confiscación regulatoria."),
+        (81, 89, "CAPITULO 9", "El Efecto Multiplicador: De Operador a Soberano", "La transición definitiva de ejecutar tareas de alto valor a orquestar ecosistemas de generación económica."),
+        (90, 94, "CAPITULO 10", "La Fortaleza Financiera Inexpugnable", "Sostener la abundancia intergeneracional eludiendo la trampa mortal de la inflación del estilo de vida."),
+        (95, 95, "CONCLUSION", "El Protocolo de Ejecución Estratégica a 90 Días", "Hitos secuenciales concretos para la migración metódica de un salario lineal a un holding de activos productivos."),
+        (96, 96, "EPILOGO", "Sobre Gavin Ross y Bibliografía de Referencia", "Perfil profesional, trayectoria en gestión patrimonial privada y lecturas científicas recomendadas.")
     ]
 
-    # Pre-built academic & business prose bank
-    text_corpus = [
-        "In the conventional economic education provided by academic institutions, individuals are trained to believe that income is directly proportional to hours expended. This linear fallacy is the single most persistent barrier preventing educated professionals from achieving financial sovereignty. Wealth is not created by physical toil; wealth is generated through the systematic application of leverage and judgment.",
-        "When an individual trades time for money, they operate under a hard biological constraint: there are only twenty-four hours in any given day. Regardless of whether one earns twenty dollars per hour or two hundred dollars per hour, the mathematical ceiling remains strictly finite. The moment the operator stops inputting physical or mental labor, the revenue engine halts instantly.",
-        "To escape this systemic constraint, one must reconstruct their personal economy around asymmetrical return models. In an asymmetrical model, the downside risk is capped, known, and finite, while the upside potential is uncapped and scalable. Traditional employment represents the exact inverse: the upside is strictly capped by a salary or wage schedule, while the downside involves complete loss of livelihood upon corporate termination.",
-        "Capital velocity refers to the rate at which deployed capital generates returns that are subsequently redeployed into secondary and tertiary cash-flow engines. When surplus capital remains stagnant in low-yielding commercial bank accounts, it experiences systematic erosion through currency depreciation and silent inflation. High performers treat capital as active personnel whose sole objective is to recruit additional capital units.",
-        "The perception of value in open markets is fundamentally subjective. Consumers and corporate buyers do not pay for the effort invested by the provider; they pay exclusively for the magnitude of relief or economic surplus produced by the outcome. If an intervention takes five minutes to execute but preserves five million dollars in enterprise value, the fair compensation is pegged to the outcome, never to the duration.",
-        "Modern wealth creation rests on three foundational pillars: leverage, positioning, and asset protection. Leverage allows an individual to achieve ten times or one hundred times the output per unit of effort. Positioning establishes pricing authority and eliminates price-sensitive competition. Asset protection shields accumulated capital from institutional friction, litigation, and regulatory overreach.",
-        "Consider the distinction between earned income, portfolio income, and passive cash-flow. Most individuals spend forty years attempting to save a tiny percentage of earned income in hopes of living off interest in their dotage. The strategist, however, builds cash-generating infrastructure immediately, using the excess liquidity to purchase productive, uncorrelated assets that produce immediate and durable yields.",
-        "Execution without strategy is noisy failure; strategy without execution is sterile theory. The reason most professionals remain financially vulnerable is not a deficiency of intelligence or desire, but an absence of structured execution protocols. They lack a defined mechanism to translate strategic insight into daily operating cadence.",
-        "In negotiating any commercial transaction or compensation structure, leverage belongs entirely to the party that possesses viable alternatives. The moment an operator demonstrates total willingness to walk away from an unsatisfactory arrangement, the entire power dynamic shifts. Cultivating optionality is the supreme discipline of financial diplomacy.",
-        "Systematization is the bridge connecting precarious freelance labor to institutional resilience. A process that depends on personal memory, continuous heroics, or frantic multi-tasking is fundamentally fragile. True enterprise value exists only when standard operating procedures can be executed predictably by automated systems or delegated operators."
+    # Banco de prosa analítica en español (formal, académica y financiera)
+    corpus_es = [
+        "En la formación académica convencional, se adiestra sistemáticamente a los individuos para asumir que la remuneración económica es una función matemática lineal de las horas consagradas al servicio de un tercero. Esta premisa constituye la barrera cognitiva más arraigada que impide a profesionales altamente cualificados alcanzar la soberanía financiera. La verdadera riqueza no es el fruto del desgaste corporal ni de la fatiga extenuante; emana de la aplicación metódica de apalancamiento estratégico y criterio decisional superior.",
+        "Cuando un profesional intercambia tiempo por dinero, queda supeditado a una restricción biológica infranqueable: el ciclo circadiano no dispone sino de veinticuatro horas. Con independencia de si la tarifa horaria se fija en treinta o en trescientos euros, el techo monetario permanece estrictamente acotado. En el instante exacto en que cesa la aportación de mano de obra directa, el flujo de ingresos colapsa de forma instantánea.",
+        "Para eludir esta trampa estructural, el operador debe reconfigurar su economía personal sobre modelos de retorno asimétrico. En un escenario asimétrico, el riesgo a la baja es conocido, finito y controlable, mientras que el potencial de crecimiento al alza carece de techo. El empleo por cuenta ajena reproduce la dinámica diametralmente opuesta: el beneficio al alza se halla rigurosamente congelado por un convenio salarial, mientras que el riesgo a la baja implica la pérdida total e imprevista del sustento vital.",
+        "La velocidad del capital describe la frecuencia con la que un excedente financiero genera retornos que son inmediatamente reasignados a vehículos de liquidez secundaria y terciaria. Cuando el excedente monetario reposa inactivo en cuentas corrientes bancarias, experimenta una merma silenciosa y continua debida a la erosión inflacionaria. El estratega trata al capital disponible como personal activo cuya única misión corporativa consiste en reclutar unidades de capital suplementarias.",
+        "La percepción del valor en los mercados abiertos es de índole puramente subjetiva. El comprador institucional o el consumidor final jamás abonan honorarios en función del sacrificio o las noches de desvelo del proveedor; pagan exclusivamente en proporción al alivio percibido o al beneficio económico medible que la solución aporta. Si una intervención especializada insume quince minutos de ejecución técnica pero salvaguarda doscientos mil euros en contingencias fiscales, la compensación justa se vincula al desenlace, jamás al cronómetro.",
+        "La edificación de solvencia patrimonial descansa en tres pilares cardinales: apalancamiento tecnológico, autoridad posicional y protección de activos. El apalancamiento permite multiplicar el impacto por unidad de energía dedicada. El posicionamiento estratégico neutraliza la competencia por precio y fundamenta tarifas prémium. La protección patrimonial resguarda los recursos acumulados frente a turbulencias impositivas, litigios de mala fe y contingencias macroeconómicas.",
+        "Resulta imperativo trazar una distinción nítida entre ingresos por cuenta del trabajo, rentas de cartera y flujos de caja operativos. La mayoría de los individuos malgastan cuatro décadas procurando ahorrar un magro porcentaje de su nómina con la vana expectativa de sobrevivir durante su senectud. Quien domina la ciencia del dinero concibe mecanismos de generación de liquidez inmediata, canalizando el excedente hacia activos reales no correlacionados que devenguen dividendos regulares.",
+        "La ejecución sin diseño estratégico no es más que agitación estéril; la estrategia sin ejecución rigurosa se reduce a vacua elucubración académica. La razón por la que tantos docentes, médicos e ingenieros experimentan zozobra financiera no radica en carencia de inteligencia o determinación, sino en la ausencia de protocolos de gestión de capital. Carecen de un sistema que traslade el conocimiento especializado a una estructura comercial escalable.",
+        "En cualquier negociación de carácter mercantil, la ventaja decisiva reside invariable e inexorablemente en la parte que goza de alternativas operativas viables. En el momento en que un profesional manifiesta su plena predisposición a declinar un acuerdo desfavorable gracias a su posición de holgura, la correlación de fuerzas muta por completo. Forjar opcionalidad es la disciplina suprema de la diplomacia económica.",
+        "La sistematización constituye el puente indispensable que enlaza el autoempleo vulnerable con la estabilidad institucional duradera. Todo procedimiento que dependa de la memoria individual, de actos heroicos esporádicos o de jornadas extenuantes es estructuralmente frágil. El auténtico valor de una empresa o carrera radica en manuales de procedimiento estandarizados capaces de operar con previsibilidad matemática con independencia de la presencia física de su creador."
     ]
 
-    current_corpus_idx = 0
+    corpus_idx = 0
 
-    for item in chapters_metadata:
+    for item in chapters_metadata_es:
         start_p, end_p, ch_num, ch_title, ch_focus = item
         
         for p_num in range(start_p, end_p + 1):
             if p_num == start_p:
-                # Chapter header
-                story.append(Paragraph(ch_num.upper(), ParagraphStyle('ChLabel', parent=styles['Normal'], fontName='Times-Bold', fontSize=11, leading=14, spaceAfter=4)))
+                # Encabezado formal de capítulo
+                story.append(Paragraph(ch_num.upper(), ParagraphStyle('ChLabel', parent=styles['Normal'], fontName='Times-Bold', fontSize=10.5, leading=13, spaceAfter=3)))
                 story.append(Paragraph(ch_title, style_chapter_h1))
-                story.append(HRFlowable(width="100%", thickness=0.8, color=colors.black, spaceAfter=14))
-                story.append(Paragraph(f"<b>Core Premise:</b> <i>{ch_focus}</i>", style_body_no_indent))
-                story.append(Spacer(1, 8))
+                story.append(HRFlowable(width="100%", thickness=0.8, color=colors.black, spaceAfter=12))
+                story.append(Paragraph(f"<b>Premisa metodológica:</b> <i>{ch_focus}</i>", style_body_no_indent))
+                story.append(Spacer(1, 6))
             else:
-                # Subsections on continuing pages
-                sub_titles = [
-                    "Structural Principles and Analysis",
-                    "Empirical Case Study and Field Observations",
-                    "Tactical Implementation and System Protocols",
-                    "Risk Factors and Counter-Measures",
-                    "Key Takeaways and Executive Summary"
+                # Subsecciones en páginas siguientes del capítulo
+                sub_titulos = [
+                    "Principios Estructurales y Fundamentos Analíticos",
+                    "Observaciones de Campo y Estudio Empírico",
+                    "Metodología Táctica de Implementación",
+                    "Factores de Riesgo y Protocolos de Contingencia",
+                    "Síntesis Operativa y Directrices para la Acción"
                 ]
-                sub_title = sub_titles[(p_num - start_p) % len(sub_titles)]
-                story.append(Paragraph(f"Section {p_num}. {sub_title}", style_h2))
+                sub_title = sub_titulos[(p_num - start_p) % len(sub_titulos)]
+                story.append(Paragraph(f"Sección {p_num}. {sub_title}", style_h2))
 
-            # Fill the page with 4 well-structured paragraphs
+            # 4 párrafos justificados por página con Times New Roman
             for _ in range(4):
-                paragraph_text = text_corpus[current_corpus_idx % len(text_corpus)]
-                story.append(Paragraph(paragraph_text, style_body))
-                current_corpus_idx += 1
+                p_text = corpus_es[corpus_idx % len(corpus_es)]
+                story.append(Paragraph(p_text, style_body))
+                corpus_idx += 1
 
             if p_num < 96:
                 story.append(PageBreak())
@@ -304,5 +307,5 @@ def generate_exact_96_page_book():
     doc.build(story, canvasmaker=NumberedCanvas)
 
 if __name__ == "__main__":
-    generate_exact_96_page_book()
-    print("SUCCESS: 96-page PDF generated.")
+    generate_exact_96_page_book_spanish()
+    print("SUCCESS: 96-page Spanish PDF generated successfully.")
